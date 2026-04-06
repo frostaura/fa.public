@@ -1,0 +1,38 @@
+services:
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    platform: linux/amd64
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+
+  api:
+    image: ${DOCKERHUB_USERNAME:-frostaura}/frostaura-public-backend:local
+    build:
+      context: .
+      dockerfile: ./src/backend/Dockerfile
+    env_file:
+      - .env
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+    volumes:
+      - frostaura-data:/app/data
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mailhog
+
+  web:
+    image: ${DOCKERHUB_USERNAME:-frostaura}/frostaura-public-web:local
+    build:
+      context: .
+      dockerfile: ./src/web/Dockerfile
+      args:
+        VITE_API_BASE_URL: /api
+    ports:
+      - '5173:80'
+    depends_on:
+      - api
+
+volumes:
+  frostaura-data:

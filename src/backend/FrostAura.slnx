@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="FrostAura.Api/FrostAura.Api.csproj" />
+  <Project Path="FrostAura.Application/FrostAura.Application.csproj" />
+  <Project Path="FrostAura.Domain/FrostAura.Domain.csproj" />
+  <Project Path="FrostAura.Infrastructure/FrostAura.Infrastructure.csproj" />
+  <Project Path="FrostAura.Tests/FrostAura.Tests.csproj" />
+</Solution>

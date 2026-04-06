@@ -1,0 +1,48 @@
+{
+  "name": "fa.public",
+  "private": true,
+  "version": "0.1.0",
+  "description": "FrostAura public website monorepo",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:api": "dotnet run --project src/backend/FrostAura.Api",
+    "build": "npm run build:web && npm run build:api",
+    "build:web": "vite build",
+    "build:api": "dotnet build src/backend/FrostAura.slnx",
+    "lint": "npm run lint:web && npm run lint:api",
+    "lint:web": "eslint . --max-warnings=0",
+    "lint:api": "dotnet format src/backend/FrostAura.slnx --verify-no-changes",
+    "test": "npm run test:web && npm run test:api",
+    "test:web": "vitest run",
+    "test:api": "dotnet test src/backend/FrostAura.slnx",
+    "e2e": "playwright test",
+    "preview": "vite preview",
+    "ci": "npm run lint && npm run build && npm run test"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-redux": "^9.2.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.59.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.4.0",
+    "happy-dom": "^20.0.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.1",
+    "vite": "^8.0.4",
+    "vitest": "^4.1.2"
+  }
+}

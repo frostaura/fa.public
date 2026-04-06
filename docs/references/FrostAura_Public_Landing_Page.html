@@ -1,0 +1,2582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrostAura | We build the future of human capability.</title>
+    <meta name="description"
+        content="FrostAura is a long-horizon company architecture building ventures across software, AI, engineering, exploration, life systems, and philanthropy.">
+    <meta name="theme-color" content="#eef4fb">
+    <meta property="og:title" content="FrostAura">
+    <meta property="og:description" content="We build the future of human capability.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #eef4fb;
+            --bg-soft: #f6f9fe;
+            --panel: rgba(255, 255, 255, 0.68);
+            --panel-strong: rgba(255, 255, 255, 0.84);
+            --stroke: rgba(93, 116, 150, 0.16);
+            --stroke-strong: rgba(80, 102, 138, 0.26);
+            --ink: #263444;
+            --ink-soft: #4d6179;
+            --ink-faint: #71829a;
+            --accent: #7c6cff;
+            --accent-2: #42b6ff;
+            --accent-3: #7dd7ca;
+            --accent-4: #ffb2c8;
+            --accent-5: #9a8cff;
+            --shadow: 0 20px 60px rgba(101, 129, 171, 0.18);
+            --shadow-soft: 0 14px 40px rgba(95, 121, 161, 0.14);
+            --radius-lg: 28px;
+            --radius-md: 20px;
+            --radius-sm: 14px;
+            --content: min(1200px, calc(100vw - 40px));
+            --topbar: 74px;
+            --ease: 380ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-color: rgba(112, 130, 162, 0.45) transparent;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Plus Jakarta Sans", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 18% 20%, rgba(124, 108, 255, 0.18), transparent 0 28%),
+                radial-gradient(circle at 82% 14%, rgba(66, 182, 255, 0.16), transparent 0 24%),
+                radial-gradient(circle at 74% 82%, rgba(125, 215, 202, 0.14), transparent 0 22%),
+                linear-gradient(180deg, #f7fbff 0%, #eef4fb 42%, #f4f8fd 100%);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(118, 140, 173, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(118, 140, 173, 0.05) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.38), transparent 74%);
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .ambient,
+        .ambient::before,
+        .ambient::after {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(26px);
+            border-radius: 999px;
+            opacity: 0.72;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .ambient {
+            width: 34vw;
+            height: 34vw;
+            right: -10vw;
+            top: 8vh;
+            background: radial-gradient(circle at 40% 40%, rgba(124, 108, 255, 0.33), rgba(124, 108, 255, 0));
+            animation: driftA 22s ease-in-out infinite alternate;
+        }
+
+        .ambient::before {
+            content: "";
+            width: 26vw;
+            height: 26vw;
+            left: -74vw;
+            top: 34vh;
+            background: radial-gradient(circle at 55% 45%, rgba(66, 182, 255, 0.3), rgba(66, 182, 255, 0));
+            animation: driftB 18s ease-in-out infinite alternate;
+        }
+
+        .ambient::after {
+            content: "";
+            width: 28vw;
+            height: 28vw;
+            left: -22vw;
+            top: 60vh;
+            background: radial-gradient(circle at 50% 50%, rgba(125, 215, 202, 0.26), rgba(125, 215, 202, 0));
+            animation: driftC 24s ease-in-out infinite alternate;
+        }
+
+        @keyframes driftA {
+            from {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+
+            to {
+                transform: translate3d(-4vw, 4vh, 0) scale(1.08);
+            }
+        }
+
+        @keyframes driftB {
+            from {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+
+            to {
+                transform: translate3d(6vw, -3vh, 0) scale(1.1);
+            }
+        }
+
+        @keyframes driftC {
+            from {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+
+            to {
+                transform: translate3d(7vw, -5vh, 0) scale(1.06);
+            }
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit;
+        }
+
+        .topbar {
+            position: fixed;
+            inset: 16px 20px auto;
+            width: calc(100vw - 40px);
+            max-width: 1240px;
+            margin: 0 auto;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 16px;
+            align-items: center;
+            padding: 14px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            background: rgba(255, 255, 255, 0.62);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 999px;
+            box-shadow: 0 18px 50px rgba(115, 137, 171, 0.12);
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.02rem;
+            letter-spacing: 0.02em;
+            font-weight: 700;
+            color: var(--ink);
+            white-space: nowrap;
+        }
+
+        .brand-mark {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            box-shadow: 0 6px 18px rgba(124, 108, 255, 0.3);
+        }
+
+        .brand-mark::before,
+        .brand-mark::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 6px;
+        }
+
+        .brand-mark::before {
+            transform: translate(7px, -7px) scale(0.62);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(125, 215, 202, 0.85));
+        }
+
+        .brand-mark::after {
+            transform: translate(3px, 3px) scale(0.38);
+            background: rgba(255, 255, 255, 0.96);
+        }
+
+        .nav {
+            justify-self: center;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav a {
+            color: var(--ink-soft);
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-size: 0.94rem;
+            font-weight: 600;
+            transition: background var(--ease), color var(--ease), transform var(--ease);
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: rgba(124, 108, 255, 0.12);
+            color: var(--ink);
+            transform: translateY(-1px);
+        }
+
+        .mini-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 16px;
+            border-radius: 999px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            box-shadow: 0 16px 30px rgba(124, 108, 255, 0.22);
+            transition: transform var(--ease), box-shadow var(--ease);
+        }
+
+        .mini-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 34px rgba(124, 108, 255, 0.26);
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section,
+        .hero {
+            width: var(--content);
+            margin: 0 auto;
+            padding-top: calc(var(--topbar) + 56px);
+            padding-bottom: 80px;
+            min-height: 100vh;
+            display: grid;
+            align-items: center;
+        }
+
+        .hero {
+            grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+            gap: clamp(32px, 6vw, 70px);
+            padding-top: calc(var(--topbar) + 78px);
+            position: relative;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.68);
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            color: var(--ink-soft);
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-3));
+            box-shadow: 0 0 0 6px rgba(124, 108, 255, 0.08);
+        }
+
+        .hero h1,
+        h2,
+        h3,
+        h4 {
+            font-family: "Space Grotesk", sans-serif;
+            letter-spacing: -0.04em;
+            margin: 0;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6.2rem);
+            line-height: 0.93;
+            margin-top: 18px;
+            margin-bottom: 20px;
+            max-width: 10ch;
+        }
+
+        .hero p.lead {
+            max-width: 62ch;
+            font-size: clamp(1.05rem, 2vw, 1.22rem);
+            line-height: 1.75;
+            color: var(--ink-soft);
+            margin: 0 0 28px;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .button,
+        .ghost-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 19px;
+            border-radius: 16px;
+            font-weight: 700;
+            transition: transform var(--ease), box-shadow var(--ease), background var(--ease), border var(--ease);
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .button {
+            color: white;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            box-shadow: 0 18px 34px rgba(111, 109, 239, 0.24);
+        }
+
+        .button:hover,
+        .ghost-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .ghost-button {
+            color: var(--ink);
+            background: rgba(255, 255, 255, 0.64);
+            border-color: rgba(255, 255, 255, 0.82);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 26px;
+            max-width: 760px;
+        }
+
+        .glass {
+            background: var(--panel);
+            border: 1px solid rgba(255, 255, 255, 0.76);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--radius-lg);
+        }
+
+        .mission-card {
+            padding: 18px 18px 16px;
+            transition: transform var(--ease), box-shadow var(--ease), border var(--ease);
+        }
+
+        .mission-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 60px rgba(117, 139, 172, 0.18);
+            border-color: rgba(124, 108, 255, 0.2);
+        }
+
+        .mission-card .label {
+            display: inline-flex;
+            padding: 7px 10px;
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--ink-soft);
+            background: rgba(255, 255, 255, 0.58);
+            margin-bottom: 14px;
+        }
+
+        .mission-card strong {
+            display: block;
+            font-size: 1.02rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .mission-card span {
+            display: block;
+            color: var(--ink-soft);
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        .hero-visual {
+            position: relative;
+            min-height: 640px;
+            display: grid;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .hero-stack {
+            position: relative;
+            width: 100%;
+            max-width: 530px;
+            min-height: 590px;
+        }
+
+        .hero-card {
+            position: absolute;
+            inset: auto 0 auto auto;
+            width: min(100%, 520px);
+            padding: 26px;
+            transition: transform var(--ease);
+        }
+
+        .hero-card-primary {
+            top: 84px;
+            left: 0;
+            transform: translateY(calc(var(--scrollY, 0px) * -0.035));
+        }
+
+        .hero-card-secondary {
+            top: 0;
+            right: -20px;
+            width: 72%;
+            padding: 22px;
+            background: rgba(255, 255, 255, 0.74);
+            transform: translateY(calc(var(--scrollY, 0px) * 0.028));
+        }
+
+        .hero-card-tertiary {
+            left: 36px;
+            bottom: 0;
+            width: 78%;
+            padding: 22px;
+            background: rgba(255, 255, 255, 0.76);
+            transform: translateY(calc(var(--scrollY, 0px) * -0.018));
+        }
+
+        .hero-card .muted {
+            color: var(--ink-faint);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .hero-card .big {
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            line-height: 1.05;
+            margin: 10px 0 16px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .stat {
+            padding: 14px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.84);
+        }
+
+        .stat strong {
+            display: block;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .stat span {
+            color: var(--ink-soft);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .chip-row,
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag,
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.66);
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+
+        .tag::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-3));
+        }
+
+        .section-shell {
+            display: grid;
+            gap: 28px;
+            width: 100%;
+        }
+
+        .section-head {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+            gap: 26px;
+            align-items: end;
+            margin-bottom: 10px;
+        }
+
+        .section-head h2 {
+            font-size: clamp(2.2rem, 4.2vw, 4rem);
+            line-height: 0.98;
+            margin-bottom: 14px;
+            max-width: 12ch;
+        }
+
+        .section-head p {
+            margin: 0;
+            color: var(--ink-soft);
+            line-height: 1.8;
+            font-size: 1.02rem;
+            max-width: 58ch;
+        }
+
+        .kicker {
+            color: var(--ink-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .architecture-layout {
+            display: grid;
+            grid-template-columns: minmax(250px, 320px) minmax(0, 1fr);
+            gap: 26px;
+            align-items: start;
+        }
+
+        .tree-panel,
+        .detail-panel,
+        .carousel-shell,
+        .form-card,
+        .sidebar-card,
+        .thesis-card {
+            padding: 24px;
+        }
+
+        .tree-title,
+        .detail-topline,
+        .card-kicker {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 800;
+            color: var(--ink-faint);
+            margin-bottom: 16px;
+        }
+
+        .tree {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .tree li {
+            margin: 0;
+        }
+
+        .tree button,
+        .tree .root-button {
+            width: 100%;
+            text-align: left;
+            padding: 14px 16px;
+            border-radius: 18px;
+            border: 1px solid transparent;
+            background: transparent;
+            color: var(--ink);
+            cursor: pointer;
+            transition: background var(--ease), transform var(--ease), border var(--ease), box-shadow var(--ease);
+        }
+
+        .tree .root-button {
+            background: rgba(124, 108, 255, 0.12);
+            border-color: rgba(124, 108, 255, 0.18);
+            font-weight: 800;
+        }
+
+        .tree button:hover,
+        .tree button.active,
+        .tree .root-button.active {
+            background: rgba(255, 255, 255, 0.84);
+            border-color: rgba(124, 108, 255, 0.18);
+            transform: translateX(4px);
+            box-shadow: 0 10px 24px rgba(115, 140, 182, 0.12);
+        }
+
+        .tree button small,
+        .tree .root-button small {
+            display: block;
+            color: var(--ink-faint);
+            margin-top: 6px;
+            line-height: 1.45;
+            font-size: 0.84rem;
+            font-weight: 600;
+        }
+
+        .detail-panel {
+            display: grid;
+            gap: 20px;
+        }
+
+        .detail-header {
+            display: grid;
+            gap: 12px;
+        }
+
+        .detail-header h3 {
+            font-size: clamp(1.8rem, 2.8vw, 2.9rem);
+            line-height: 1.03;
+        }
+
+        .detail-header .subtitle {
+            color: var(--ink-soft);
+            font-size: 1.02rem;
+            line-height: 1.75;
+            max-width: 72ch;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .detail-card {
+            padding: 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            min-height: 152px;
+        }
+
+        .detail-card h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .detail-card p,
+        .detail-card li {
+            color: var(--ink-soft);
+            line-height: 1.6;
+            font-size: 0.92rem;
+        }
+
+        .detail-card ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .role-card {
+            padding: 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.68);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            min-height: 158px;
+        }
+
+        .role-card h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .role-card p {
+            margin: 0;
+            color: var(--ink-soft);
+            font-size: 0.92rem;
+            line-height: 1.65;
+        }
+
+        .carousel-shell {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .carousel-controls p {
+            margin: 0;
+            color: var(--ink-soft);
+            max-width: 64ch;
+            line-height: 1.7;
+        }
+
+        .carousel-nav {
+            display: inline-flex;
+            gap: 10px;
+        }
+
+        .carousel-button {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.84);
+            background: rgba(255, 255, 255, 0.74);
+            color: var(--ink);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: transform var(--ease), box-shadow var(--ease), background var(--ease);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .carousel-button:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .carousel-track {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(300px, 34%);
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .project-card {
+            scroll-snap-align: start;
+            min-height: 370px;
+            padding: 22px;
+            border-radius: 24px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.62));
+            border: 1px solid rgba(255, 255, 255, 0.84);
+            box-shadow: var(--shadow-soft);
+            display: grid;
+            align-content: start;
+            gap: 14px;
+            transition: transform var(--ease), box-shadow var(--ease), border var(--ease);
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 56px rgba(116, 136, 178, 0.18);
+            border-color: rgba(124, 108, 255, 0.18);
+        }
+
+        .project-card .project-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            line-height: 1.1;
+        }
+
+        .project-card .path {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.79rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--ink-faint);
+        }
+
+        .project-card p {
+            margin: 0;
+            color: var(--ink-soft);
+            line-height: 1.75;
+            font-size: 0.96rem;
+        }
+
+        .project-card .cross {
+            display: grid;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .project-card .cross strong {
+            font-size: 0.88rem;
+            color: var(--ink);
+        }
+
+        .split-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.96fr) minmax(340px, 1.04fr);
+            gap: 28px;
+            align-items: start;
+        }
+
+        .sidebar-stack {
+            display: grid;
+            gap: 16px;
+        }
+
+        .sidebar-card h3,
+        .form-card h3,
+        .thesis-card h3 {
+            font-size: 1.42rem;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-card p,
+        .form-card p,
+        .thesis-card p {
+            margin: 0;
+            color: var(--ink-soft);
+            line-height: 1.75;
+        }
+
+        .opportunity-grid,
+        .thesis-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .opportunity-card,
+        .thesis-item {
+            padding: 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            min-height: 132px;
+        }
+
+        .opportunity-card h4,
+        .thesis-item h4 {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .opportunity-card p,
+        .thesis-item p {
+            font-size: 0.92rem;
+            line-height: 1.65;
+            color: var(--ink-soft);
+        }
+
+        .form-card {
+            display: grid;
+            gap: 18px;
+        }
+
+        .progress {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .progress-step {
+            padding: 12px 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.56);
+            border: 1px solid rgba(255, 255, 255, 0.76);
+            color: var(--ink-faint);
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: background var(--ease), color var(--ease), border var(--ease);
+        }
+
+        .progress-step.active {
+            background: rgba(124, 108, 255, 0.12);
+            color: var(--ink);
+            border-color: rgba(124, 108, 255, 0.18);
+        }
+
+        .multi-step-form {
+            display: grid;
+            gap: 18px;
+        }
+
+        .form-step {
+            display: none;
+            gap: 16px;
+            animation: fadeSlide 360ms ease;
+        }
+
+        .form-step.active {
+            display: grid;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .field label {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--ink-soft);
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            border: 1px solid rgba(124, 147, 182, 0.22);
+            background: rgba(255, 255, 255, 0.82);
+            color: var(--ink);
+            border-radius: 16px;
+            padding: 14px 15px;
+            outline: none;
+            transition: border var(--ease), box-shadow var(--ease), transform var(--ease);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
+        }
+
+        .field textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: rgba(124, 108, 255, 0.44);
+            box-shadow: 0 0 0 4px rgba(124, 108, 255, 0.1);
+        }
+
+        .choice-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .choice {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .choice input {
+            position: absolute;
+            opacity: 0;
+            inset: 0;
+            cursor: pointer;
+        }
+
+        .choice span {
+            display: inline-flex;
+            align-items: center;
+            padding: 11px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.84);
+            color: var(--ink-soft);
+            font-size: 0.88rem;
+            font-weight: 700;
+            transition: background var(--ease), color var(--ease), border var(--ease), transform var(--ease);
+        }
+
+        .choice input:checked+span {
+            background: rgba(124, 108, 255, 0.12);
+            color: var(--ink);
+            border-color: rgba(124, 108, 255, 0.22);
+            transform: translateY(-1px);
+        }
+
+        .field-note {
+            color: var(--ink-faint);
+            font-size: 0.82rem;
+            line-height: 1.55;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+
+        .form-message {
+            min-height: 22px;
+            font-size: 0.9rem;
+            color: var(--ink-soft);
+            line-height: 1.5;
+        }
+
+        .fineprint {
+            color: var(--ink-faint);
+            font-size: 0.82rem;
+            line-height: 1.65;
+            margin-top: 4px;
+        }
+
+        .footer {
+            min-height: auto;
+            padding-bottom: 36px;
+        }
+
+        .footer-shell {
+            padding: 24px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) auto;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .footer-shell p {
+            margin: 0;
+            color: var(--ink-soft);
+            line-height: 1.75;
+            max-width: 70ch;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .footer-links a {
+            padding: 10px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.84);
+            color: var(--ink-soft);
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 700ms ease, transform 700ms ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hide-mobile {
+            display: initial;
+        }
+
+        @media (max-width: 1100px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                min-height: 520px;
+            }
+
+            .section-head,
+            .architecture-layout,
+            .split-layout,
+            .footer-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-grid,
+            .roles-grid,
+            .field-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .carousel-track {
+                grid-auto-columns: minmax(290px, 52%);
+            }
+        }
+
+        @media (max-width: 860px) {
+            .topbar {
+                grid-template-columns: 1fr auto;
+                gap: 12px;
+                padding: 12px 14px;
+                border-radius: 28px;
+            }
+
+            .nav {
+                grid-column: 1 / -1;
+                order: 3;
+                justify-content: flex-start;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 2px;
+            }
+
+            .mission-grid,
+            .stats-row,
+            .detail-grid,
+            .roles-grid,
+            .opportunity-grid,
+            .thesis-grid,
+            .progress,
+            .field-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .carousel-track {
+                grid-auto-columns: minmax(270px, 85%);
+            }
+
+            .hero-card-secondary,
+            .hero-card-tertiary {
+                width: 88%;
+            }
+
+            .footer-links {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 640px) {
+
+            .section,
+            .hero {
+                width: min(100vw - 22px, 100%);
+                padding-top: calc(var(--topbar) + 42px);
+                padding-bottom: 54px;
+            }
+
+            .hero {
+                gap: 22px;
+            }
+
+            .hero h1 {
+                max-width: none;
+            }
+
+            .hero-visual {
+                min-height: 500px;
+            }
+
+            .hero-stack {
+                min-height: 500px;
+            }
+
+            .hero-card {
+                padding: 18px;
+            }
+
+            .hero-card-secondary {
+                right: 0;
+                width: 92%;
+            }
+
+            .hero-card-tertiary {
+                left: 14px;
+                width: 88%;
+            }
+
+            .detail-panel,
+            .tree-panel,
+            .carousel-shell,
+            .form-card,
+            .sidebar-card,
+            .thesis-card {
+                padding: 18px;
+            }
+
+            .button,
+            .ghost-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .button-row,
+            .form-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .mini-cta {
+                display: none;
+            }
+
+            .hide-mobile {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ambient" aria-hidden="true"></div>
+
+    <header class="topbar">
+        <a class="brand" href="#home" aria-label="FrostAura home">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>FrostAura</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+            <a href="#home" data-nav="home">Home</a>
+            <a href="#architecture" data-nav="architecture">Architecture</a>
+            <a href="#projects" data-nav="projects">Projects</a>
+            <a href="#careers" data-nav="careers">Careers</a>
+            <a href="#investors" data-nav="investors">Investors</a>
+        </nav>
+
+        <a class="mini-cta" id="contextCta" href="#careers">Explore</a>
+    </header>
+
+    <main>
+        <section class="hero route-section" id="home" data-route="home">
+            <div class="reveal">
+                <div class="eyebrow" id="contextEyebrow">FrostAura | Long-horizon company architecture</div>
+                <h1 id="heroTitle">We build the future of human capability.</h1>
+                <p class="lead" id="heroText">
+                    FrostAura is a long-horizon company architecture built to turn ambition into enduring progress
+                    across software,
+                    AI, hard tech, exploration, life systems, and public good.
+                </p>
+
+                <div class="button-row">
+                    <a class="button" href="#architecture">Explore the architecture</a>
+                    <a class="ghost-button" id="heroSecondary" href="#careers">Meet the people we hire</a>
+                </div>
+
+                <div class="mission-grid">
+                    <article class="mission-card glass">
+                        <div class="label">Short-term</div>
+                        <strong>Build profitable, high-performance companies that generate capital and
+                            capability.</strong>
+                        <span>Commercial execution, software revenue, lean teams, and disciplined operating
+                            excellence.</span>
+                    </article>
+                    <article class="mission-card glass">
+                        <div class="label">Medium-term</div>
+                        <strong>Launch ventures that expand human capability through intelligence, engineering, and
+                            exploration.</strong>
+                        <span>New products, robotics, advanced systems, and frontier operating platforms.</span>
+                    </article>
+                    <article class="mission-card glass">
+                        <div class="label">Long-term</div>
+                        <strong>Advance health, resilience, longevity, and human progress at civilization
+                            scale.</strong>
+                        <span>Enduring technology, research, institutions, and measurable public benefit.</span>
+                    </article>
+                </div>
+            </div>
+
+            <div class="hero-visual reveal">
+                <div class="hero-stack">
+                    <article class="hero-card hero-card-secondary glass">
+                        <div class="detail-topline">Operating logic</div>
+                        <h3 class="big">Capital -> capability -> ventures -> public good</h3>
+                        <p class="muted">
+                            Technologies and Underwater generate momentum. Industries, Helix, Exploration, and Labs
+                            build frontier capability.
+                            Ventures scales durable companies. Foundation expresses visible public benefit.
+                        </p>
+                    </article>
+
+                    <article class="hero-card hero-card-primary glass">
+                        <div class="detail-topline">FrostAura Consolidated</div>
+                        <h3 class="big">A family of companies designed to compound strength.</h3>
+                        <p class="muted">
+                            FrostAura Technologies. FrostAura Industries. FrostAura Helix. FrostAura Underwater.
+                            FrostAura Exploration.
+                            FrostAura Labs. FrostAura Ventures. FrostAura Foundation.
+                        </p>
+
+                        <div class="stats-row">
+                            <div class="stat">
+                                <strong>8</strong>
+                                <span>Core entities inside the public architecture.</span>
+                            </div>
+                            <div class="stat">
+                                <strong>3</strong>
+                                <span>Mission horizons guiding every decision.</span>
+                            </div>
+                            <div class="stat">
+                                <strong>1</strong>
+                                <span>Long-range thesis: human advancement with elegant execution.</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="hero-card hero-card-tertiary glass">
+                        <div class="detail-topline">Brand doctrine</div>
+                        <div class="chip-row">
+                            <span class="chip">Health. Wealth. World Betterment.</span>
+                            <span class="chip">From ambition to enduring progress.</span>
+                            <span class="chip hide-mobile">Built for excellence. Directed toward humanity.</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section route-section" id="architecture" data-route="architecture">
+            <div class="section-shell">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="kicker">Portfolio architecture</div>
+                        <h2>The company system, not just the company.</h2>
+                    </div>
+                    <p>
+                        FrostAura is designed as a parent system for focused ventures. Each company has its own mission,
+                        operating role,
+                        lean senior team, and signature programs. Together they create a structure that can grow without
+                        losing coherence.
+                    </p>
+                </div>
+
+                <div class="architecture-layout">
+                    <aside class="tree-panel glass reveal">
+                        <div class="tree-title">Select a company</div>
+                        <ul class="tree" id="treeNav">
+                            <li>
+                                <button class="root-button active" data-company="consolidated">
+                                    FrostAura Consolidated
+                                    <small>Parent governance, capital allocation, brand, mission, and portfolio
+                                        discipline.</small>
+                                </button>
+                            </li>
+                            <li><button data-company="technologies">FrostAura Technologies<small>Software, AI, systems,
+                                        execution, revenue.</small></button></li>
+                            <li><button data-company="industries">FrostAura Industries<small>Robotics, electronics,
+                                        drones, embodied capability.</small></button></li>
+                            <li><button data-company="helix">FrostAura Helix<small>Life systems, computational biology,
+                                        vitality, longevity.</small></button></li>
+                            <li><button data-company="underwater">FrostAura Underwater<small>Elite underwater
+                                        operations, training, expedition support.</small></button></li>
+                            <li><button data-company="exploration">FrostAura Exploration<small>Marine archaeology,
+                                        discovery, research missions.</small></button></li>
+                            <li><button data-company="labs">FrostAura Labs<small>Moonshots, stealth R&amp;D, future
+                                        strategic capability.</small></button></li>
+                            <li><button data-company="ventures">FrostAura Ventures<small>Spin-outs, venture formation,
+                                        acquisitions, scaling.</small></button></li>
+                            <li><button data-company="foundation">FrostAura Foundation<small>Philanthropy, stewardship,
+                                        visible public benefit.</small></button></li>
+                        </ul>
+                    </aside>
+
+                    <section class="detail-panel glass reveal" id="detailPanel" aria-live="polite"></section>
+                </div>
+            </div>
+        </section>
+
+        <section class="section route-section" id="projects" data-route="projects">
+            <div class="section-shell">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="kicker">Programs and cross-ties</div>
+                        <h2>Projects that move through the system.</h2>
+                    </div>
+                    <p>
+                        FrostAura projects are placed where they can win fastest, then connected across the rest of the
+                        architecture.
+                        Software feeds hardware. Hardware feeds exploration. AI feeds life systems. Mature programs can
+                        become standalone ventures.
+                    </p>
+                </div>
+
+                <div class="carousel-shell glass reveal">
+                    <div class="carousel-controls">
+                        <p>
+                            These flagship programs show how the FrostAura structure compounds: operating work creates
+                            cash flow, which builds
+                            capability, which produces ventures, which deepens the long-range thesis.
+                        </p>
+                        <div class="carousel-nav">
+                            <button class="carousel-button" id="projectsPrev"
+                                aria-label="Previous project">&#8592;</button>
+                            <button class="carousel-button" id="projectsNext" aria-label="Next project">&#8594;</button>
+                        </div>
+                    </div>
+
+                    <div class="carousel-track" id="projectCarousel" aria-label="Project highlights"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section route-section" id="careers" data-route="careers">
+            <div class="section-shell">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="kicker">Careers</div>
+                        <h2>Small teams. Senior people. Disproportionate leverage.</h2>
+                    </div>
+                    <p>
+                        FrostAura is designed for leaders, principal engineers, senior researchers, and operators who
+                        can own systems end to end.
+                        We hire for taste, judgment, technical depth, and calm execution.
+                    </p>
+                </div>
+
+                <div class="split-layout">
+                    <div class="sidebar-stack reveal">
+                        <article class="sidebar-card glass">
+                            <div class="card-kicker">How we work</div>
+                            <h3>We prefer compact teams with exceptional range.</h3>
+                            <p>
+                                FrostAura teams stay intentionally lean. Each senior person should create outsized
+                                leverage: setting direction,
+                                building real systems, raising standards, and unlocking future capability across more
+                                than one company.
+                            </p>
+
+                            <div class="opportunity-grid">
+                                <div class="opportunity-card">
+                                    <h4>Leadership tracks</h4>
+                                    <p>Division leads, founding operators, strategic programs, capital, partnerships,
+                                        and mission-critical execution.</p>
+                                </div>
+                                <div class="opportunity-card">
+                                    <h4>Senior engineering tracks</h4>
+                                    <p>Principal platform, AI, robotics, embedded, autonomy, computational biology, and
+                                        systems architecture.</p>
+                                </div>
+                                <div class="opportunity-card">
+                                    <h4>Research and field tracks</h4>
+                                    <p>Exploration, marine archaeology, dive operations, expedition systems, and
+                                        selective advanced R&amp;D.</p>
+                                </div>
+                                <div class="opportunity-card">
+                                    <h4>Culture signals</h4>
+                                    <p>Excellent judgment, precision, bias to build, elegant communication, and comfort
+                                        with high standards.</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="sidebar-card glass">
+                            <div class="card-kicker">Current focus roles</div>
+                            <div class="tag-row">
+                                <span class="tag">Principal Platform Engineer</span>
+                                <span class="tag">Principal AI Engineer</span>
+                                <span class="tag">Robotics Systems Lead</span>
+                                <span class="tag">Computational Life Systems Lead</span>
+                                <span class="tag">Expedition Operations Director</span>
+                                <span class="tag">Strategy and Capital Lead</span>
+                            </div>
+                        </article>
+                    </div>
+
+                    <article class="form-card glass reveal">
+                        <div class="card-kicker">Apply to FrostAura</div>
+                        <h3>Introduce yourself in three short steps.</h3>
+                        <p>
+                            This form is designed for high-signal submissions. Share where you create the most leverage,
+                            the hardest things you
+                            have built or led, and how you would strengthen FrostAura.
+                        </p>
+
+                        <div class="progress" id="careersProgress">
+                            <div class="progress-step active">1. Focus</div>
+                            <div class="progress-step">2. Profile</div>
+                            <div class="progress-step">3. Signal</div>
+                        </div>
+
+                        <form class="multi-step-form" id="careersForm">
+                            <section class="form-step active" data-step="0">
+                                <div class="field">
+                                    <label>Which company interests you most?</label>
+                                    <select name="primary_company_interest" required>
+                                        <option value="">Select one</option>
+                                        <option>FrostAura Technologies</option>
+                                        <option>FrostAura Industries</option>
+                                        <option>FrostAura Helix</option>
+                                        <option>FrostAura Underwater</option>
+                                        <option>FrostAura Exploration</option>
+                                        <option>FrostAura Labs</option>
+                                        <option>FrostAura Ventures</option>
+                                        <option>FrostAura Foundation</option>
+                                    </select>
+                                </div>
+
+                                <div class="field">
+                                    <label>What track best describes you?</label>
+                                    <select name="role_track" required>
+                                        <option value="">Select one</option>
+                                        <option>Leadership / Division Building</option>
+                                        <option>Principal Software and Platform Engineering</option>
+                                        <option>Principal AI / ML Engineering</option>
+                                        <option>Robotics / Embedded / Hardware Engineering</option>
+                                        <option>Computational Biology / Life Systems</option>
+                                        <option>Field Operations / Exploration</option>
+                                        <option>Strategy / Capital / Partnerships</option>
+                                        <option>Brand / Communications / Narrative</option>
+                                    </select>
+                                </div>
+
+                                <div class="field">
+                                    <label>Availability window</label>
+                                    <select name="availability_window" required>
+                                        <option value="">Select one</option>
+                                        <option>Immediately</option>
+                                        <option>Within 30 days</option>
+                                        <option>Within 90 days</option>
+                                        <option>Exploratory only</option>
+                                    </select>
+                                </div>
+
+                                <div class="field">
+                                    <label>Where are you based?</label>
+                                    <input type="text" name="location" placeholder="City, country" required>
+                                </div>
+
+                                <div class="field full">
+                                    <label>Where else could you add value?</label>
+                                    <div class="choice-grid">
+                                        <label class="choice"><input type="checkbox" name="adjacent_company_interest"
+                                                value="Technologies"><span>Technologies</span></label>
+                                        <label class="choice"><input type="checkbox" name="adjacent_company_interest"
+                                                value="Industries"><span>Industries</span></label>
+                                        <label class="choice"><input type="checkbox" name="adjacent_company_interest"
+                                                value="Helix"><span>Helix</span></label>
+                                        <label class="choice"><input type="checkbox" name="adjacent_company_interest"
+                                                value="Underwater"><span>Underwater</span></label>
+                                        <label class="choice"><input type="checkbox" name="adjacent_company_interest"
+                                                value="Exploration"><span>Exploration</span></label>
+                                        <label class="choice"><input type="checkbox" name="adjacent_company_interest"
+                                                value="Labs"><span>Labs</span></label>
+                                        <label class="choice"><input type="checkbox" name="adjacent_company_interest"
+                                                value="Ventures"><span>Ventures</span></label>
+                                        <label class="choice"><input type="checkbox" name="adjacent_company_interest"
+                                                value="Foundation"><span>Foundation</span></label>
+                                    </div>
+                                    <div class="field-note">Optional but useful if your work naturally spans more than
+                                        one FrostAura company.</div>
+                                </div>
+                            </section>
+
+                            <section class="form-step" data-step="1">
+                                <div class="field-grid">
+                                    <div class="field">
+                                        <label>Full name</label>
+                                        <input type="text" name="full_name" required>
+                                    </div>
+                                    <div class="field">
+                                        <label>Email address</label>
+                                        <input type="email" name="email" required>
+                                    </div>
+                                    <div class="field">
+                                        <label>LinkedIn or website</label>
+                                        <input type="url" name="website" placeholder="https://">
+                                    </div>
+                                    <div class="field">
+                                        <label>Portfolio, GitHub, or publications</label>
+                                        <input type="url" name="portfolio" placeholder="https://">
+                                    </div>
+                                    <div class="field full">
+                                        <label>Most senior role held recently</label>
+                                        <input type="text" name="recent_role"
+                                            placeholder="Example: Principal Platform Engineer" required>
+                                    </div>
+                                    <div class="field full">
+                                        <label>Resume or profile link</label>
+                                        <input type="url" name="resume_link" placeholder="https://">
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="form-step" data-step="2">
+                                <div class="field">
+                                    <label>What is the highest-leverage thing you would help FrostAura build?</label>
+                                    <textarea name="highest_leverage_contribution" required></textarea>
+                                </div>
+                                <div class="field">
+                                    <label>Tell us about one hard system, team, or mission you have already
+                                        delivered.</label>
+                                    <textarea name="proof_of_work" required></textarea>
+                                </div>
+                                <div class="field">
+                                    <label>Anything else we should know?</label>
+                                    <textarea name="extra_note" placeholder="Optional"></textarea>
+                                </div>
+                                <div class="fineprint">
+                                    By submitting, you consent to FrostAura contacting you about relevant roles. In
+                                    static site mode, this page packages
+                                    your submission into a structured JSON file and prepares an email handoff so it can
+                                    be delivered without a backend.
+                                </div>
+                            </section>
+
+                            <div class="form-actions">
+                                <button type="button" class="ghost-button" data-action="back" data-form="careers"
+                                    disabled>Back</button>
+                                <div class="form-message" id="careersMessage" aria-live="polite"></div>
+                                <button type="button" class="button" data-action="next"
+                                    data-form="careers">Next</button>
+                            </div>
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section route-section" id="investors" data-route="investors">
+            <div class="section-shell">
+                <div class="section-head reveal">
+                    <div>
+                        <div class="kicker">Investors and strategic partners</div>
+                        <h2>Long-horizon conversations for aligned capital and capability.</h2>
+                    </div>
+                    <p>
+                        FrostAura is built for compounding. Near-term operating engines generate momentum. That momentum
+                        funds hard tech,
+                        life systems, exploration, and future venture formation. We welcome selective conversations with
+                        aligned partners.
+                    </p>
+                </div>
+
+                <div class="split-layout">
+                    <div class="sidebar-stack reveal">
+                        <article class="thesis-card glass">
+                            <div class="card-kicker">Why FrostAura is structured this way</div>
+                            <h3>A disciplined thesis, not a loose collection of ideas.</h3>
+                            <p>
+                                The parent company keeps capital allocation, brand, governance, and mission coherence
+                                centralized while each company
+                                stays focused and operationally sharp.
+                            </p>
+
+                            <div class="thesis-grid">
+                                <div class="thesis-item">
+                                    <h4>Operating cash flow</h4>
+                                    <p>Software, AI systems, and underwater operations can create near-term momentum and
+                                        strategic control.</p>
+                                </div>
+                                <div class="thesis-item">
+                                    <h4>Capability compounding</h4>
+                                    <p>Industries, Helix, Exploration, and Labs deepen the technical moat and future
+                                        opportunity surface.</p>
+                                </div>
+                                <div class="thesis-item">
+                                    <h4>Venture optionality</h4>
+                                    <p>Promising internal programs can mature into standalone companies through
+                                        FrostAura Ventures.</p>
+                                </div>
+                                <div class="thesis-item">
+                                    <h4>Visible public good</h4>
+                                    <p>FrostAura Foundation anchors legitimacy and impact as the architecture grows.</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="sidebar-card glass">
+                            <div class="card-kicker">Who this section is for</div>
+                            <div class="tag-row">
+                                <span class="tag">Family offices</span>
+                                <span class="tag">Strategic partners</span>
+                                <span class="tag">Research collaborators</span>
+                                <span class="tag">Long-horizon capital</span>
+                                <span class="tag">Philanthropic capital</span>
+                                <span class="tag">Mission-aligned operators</span>
+                            </div>
+                        </article>
+                    </div>
+
+                    <article class="form-card glass reveal">
+                        <div class="card-kicker">Investor intake</div>
+                        <h3>Share your fit, focus, and thesis.</h3>
+                        <p>
+                            This is an elegant first filter for aligned conversations. Tell us what kind of capital or
+                            partnership you represent,
+                            where your interest lies inside the FrostAura architecture, and how you would add strategic
+                            value.
+                        </p>
+
+                        <div class="progress" id="investorsProgress">
+                            <div class="progress-step active">1. Profile</div>
+                            <div class="progress-step">2. Interest</div>
+                            <div class="progress-step">3. Thesis</div>
+                        </div>
+
+                        <form class="multi-step-form" id="investorsForm">
+                            <section class="form-step active" data-step="0">
+                                <div class="field-grid">
+                                    <div class="field">
+                                        <label>Full name</label>
+                                        <input type="text" name="full_name" required>
+                                    </div>
+                                    <div class="field">
+                                        <label>Organization</label>
+                                        <input type="text" name="organization" required>
+                                    </div>
+                                    <div class="field">
+                                        <label>Email address</label>
+                                        <input type="email" name="email" required>
+                                    </div>
+                                    <div class="field">
+                                        <label>Type</label>
+                                        <select name="investor_type" required>
+                                            <option value="">Select one</option>
+                                            <option>Family office</option>
+                                            <option>Angel or syndicate</option>
+                                            <option>Strategic corporate investor</option>
+                                            <option>Venture capital</option>
+                                            <option>Private capital / PE</option>
+                                            <option>Research / science partner</option>
+                                            <option>Philanthropic capital</option>
+                                        </select>
+                                    </div>
+                                    <div class="field full">
+                                        <label>Region or primary geography</label>
+                                        <input type="text" name="region"
+                                            placeholder="Example: South Africa, Europe, global" required>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="form-step" data-step="1">
+                                <div class="field full" data-required-group="investor_interest">
+                                    <label>Which FrostAura companies are most relevant to you?</label>
+                                    <div class="choice-grid">
+                                        <label class="choice"><input type="checkbox" name="company_interest"
+                                                value="Technologies"><span>Technologies</span></label>
+                                        <label class="choice"><input type="checkbox" name="company_interest"
+                                                value="Industries"><span>Industries</span></label>
+                                        <label class="choice"><input type="checkbox" name="company_interest"
+                                                value="Helix"><span>Helix</span></label>
+                                        <label class="choice"><input type="checkbox" name="company_interest"
+                                                value="Underwater"><span>Underwater</span></label>
+                                        <label class="choice"><input type="checkbox" name="company_interest"
+                                                value="Exploration"><span>Exploration</span></label>
+                                        <label class="choice"><input type="checkbox" name="company_interest"
+                                                value="Labs"><span>Labs</span></label>
+                                        <label class="choice"><input type="checkbox" name="company_interest"
+                                                value="Ventures"><span>Ventures</span></label>
+                                        <label class="choice"><input type="checkbox" name="company_interest"
+                                                value="Foundation"><span>Foundation</span></label>
+                                    </div>
+                                </div>
+
+                                <div class="field-grid">
+                                    <div class="field">
+                                        <label>Interest profile</label>
+                                        <select name="interest_profile" required>
+                                            <option value="">Select one</option>
+                                            <option>Operating company growth</option>
+                                            <option>Frontier R&amp;D exposure</option>
+                                            <option>Strategic partnership</option>
+                                            <option>Portfolio venture creation</option>
+                                            <option>Philanthropic / impact alignment</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label>Capital range or resource scope</label>
+                                        <select name="capital_range" required>
+                                            <option value="">Select one</option>
+                                            <option>Below 250k USD equivalent</option>
+                                            <option>250k - 1M USD equivalent</option>
+                                            <option>1M - 5M USD equivalent</option>
+                                            <option>5M - 25M USD equivalent</option>
+                                            <option>25M+ USD equivalent</option>
+                                            <option>Non-capital strategic value only</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label>Time horizon</label>
+                                        <select name="time_horizon" required>
+                                            <option value="">Select one</option>
+                                            <option>Immediate</option>
+                                            <option>Within 6 months</option>
+                                            <option>Within 12 months</option>
+                                            <option>Exploratory / long horizon</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label>Preferred mode</label>
+                                        <select name="preferred_mode" required>
+                                            <option value="">Select one</option>
+                                            <option>Capital only</option>
+                                            <option>Capital and strategic support</option>
+                                            <option>Partnership only</option>
+                                            <option>Research collaboration</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="form-step" data-step="2">
+                                <div class="field">
+                                    <label>Why do you believe FrostAura is interesting?</label>
+                                    <textarea name="thesis" required></textarea>
+                                </div>
+                                <div class="field">
+                                    <label>How could you accelerate the system beyond capital?</label>
+                                    <textarea name="value_add" required></textarea>
+                                </div>
+                                <div class="field">
+                                    <label>Anything else we should know?</label>
+                                    <textarea name="extra_note" placeholder="Optional"></textarea>
+                                </div>
+                                <div class="fineprint">
+                                    This section is for expressions of interest and aligned conversation only. Nothing
+                                    on this page constitutes an
+                                    offer to sell securities. In static site mode, your submission is packaged as
+                                    structured data and an email handoff.
+                                </div>
+                            </section>
+
+                            <div class="form-actions">
+                                <button type="button" class="ghost-button" data-action="back" data-form="investors"
+                                    disabled>Back</button>
+                                <div class="form-message" id="investorsMessage" aria-live="polite"></div>
+                                <button type="button" class="button" data-action="next"
+                                    data-form="investors">Next</button>
+                            </div>
+                        </form>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section footer">
+            <div class="footer-shell glass reveal">
+                <div>
+                    <div class="card-kicker">FrostAura</div>
+                    <p>
+                        A long-horizon company architecture built to create wealth, capability, and enduring public
+                        good. Primary routing defaults:
+                        frostaura.net -> #home, careers.frostaura.net -> #careers, investors.frostaura.net ->
+                        #investors.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#architecture">Architecture</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#careers">Careers</a>
+                    <a href="#investors">Investors</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Optional direct delivery endpoints for production hosting:
+        // window.FROSTAURA_ENDPOINTS = {
+        //   careers: "https://your-endpoint.example/careers",
+        //   investors: "https://your-endpoint.example/investors"
+        // };
+        const COMPANY_DATA = {
+            consolidated: {
+                name: "FrostAura Consolidated",
+                imply: "Structured parent, capital allocator, mission keeper, brand system.",
+                mission: "Build and steer a family of companies that expand human capability and long-term progress without losing elegance, discipline, or moral direction.",
+                focus: [
+                    "Capital allocation, portfolio design, governance, brand quality, and mission integrity.",
+                    "Executive office functions: strategy, treasury discipline, legal structure, communications, and senior talent selection.",
+                    "Keeps the system coherent while allowing each company to stay operationally sharp."
+                ],
+                projects: ["Portfolio strategy", "Brand system", "IP and governance", "Capital planning", "Leadership recruitment"],
+                cross: ["All divisions", "Public narrative", "Long-horizon planning"],
+                roles: [
+                    ["Founder and Chief Executive Officer", "Long-range strategy, capital allocation judgment, founder-led partnerships, systems thinking, exacting standards."],
+                    ["Chief of Staff", "Translates intent into operating rhythm, coordinates cross-company execution, writes clearly, protects focus."],
+                    ["Director of Capital and Finance", "Financial modeling, treasury discipline, scenario planning, reporting clarity, deal structuring."],
+                    ["Brand and Communications Director", "Brand systems, narrative quality, visual taste, public communication, investor and partner materials."]
+                ]
+            },
+            technologies: {
+                name: "FrostAura Technologies",
+                imply: "Applied intelligence, software, systems, execution, revenue.",
+                mission: "Generate capital and control systems through software, AI, automation, and high-performance digital products.",
+                focus: [
+                    "Near-term commercial engine for product and services momentum.",
+                    "Home for Life OS, TaleWeaver, FrostAura Startup, enterprise AI systems, and security software.",
+                    "Supplies software, data, and operating intelligence to the rest of FrostAura."
+                ],
+                projects: ["Life OS", "TaleWeaver", "FrostAura Startup", "Enterprise AI systems", "Security and defense software"],
+                cross: ["Industries", "Helix", "Labs", "All internal systems"],
+                roles: [
+                    ["Division Lead / GM", "P&L ownership, product strategy, customer judgment, hiring senior builders, structured execution."],
+                    ["Principal Platform Engineer", "Distributed systems, product architecture, reliability, security, elegant implementation."],
+                    ["Principal AI Engineer", "Applied ML, LLM systems, data pipelines, evaluation, AI product judgment."],
+                    ["Senior Product Systems Architect", "Translates mission into software workflows, product clarity, cross-team systems design."]
+                ]
+            },
+            industries: {
+                name: "FrostAura Industries",
+                imply: "Hard tech, engineering, embodied systems, scale.",
+                mission: "Build intelligent physical systems that extend human reach through robotics, electronics, drones, and advanced hardware.",
+                focus: [
+                    "Embodies software and autonomy in the physical world.",
+                    "Develops robotics, drones, sensor systems, embedded electronics, and mission hardware.",
+                    "Supports exploration, field operations, and future special-purpose systems."
+                ],
+                projects: ["Robotics systems", "Drones and autonomy", "Embedded electronics", "Sensor and control systems", "Mission hardware"],
+                cross: ["Technologies", "Underwater", "Exploration", "Labs"],
+                roles: [
+                    ["Division Lead / CTO Hardware", "Technical leadership, product-platform decisions, supplier strategy, systems integration, high standards."],
+                    ["Principal Robotics Engineer", "Mechatronics, control systems, autonomy integration, rigorous testing, deployment judgment."],
+                    ["Lead Embedded Systems Engineer", "Firmware, board interfaces, power systems, sensor fusion, real-world reliability."],
+                    ["Autonomy Systems Engineer", "Perception stacks, planning, edge compute, simulation-to-field transfer."]
+                ]
+            },
+            helix: {
+                name: "FrostAura Helix",
+                imply: "Life systems, computational biology, vitality, future biology.",
+                mission: "Advance biology, health optimization, and longevity through computational life systems, data, and carefully directed R&D.",
+                focus: [
+                    "Bio-AI, protein folding, genomics, and long-horizon life systems work.",
+                    "Applies software, data, and modeling to health, biological understanding, and vitality.",
+                    "Holds the deepest long-term health and longevity ambitions inside the public architecture."
+                ],
+                projects: ["Protein folding AI", "Computational biology", "Genomics and gene systems", "Longevity programs", "Bio-optimization platforms"],
+                cross: ["Technologies", "Labs", "Industries"],
+                roles: [
+                    ["Division Lead / Life Systems Director", "Research prioritization, scientific taste, partner judgment, long-horizon program design."],
+                    ["Principal Computational Biology Engineer", "Bioinformatics pipelines, modeling, reproducibility, experimental-computational loops."],
+                    ["Principal ML Scientist", "Biological machine learning, data strategy, evaluation rigor, translational judgment."],
+                    ["Bioinformatics Platform Engineer", "Data systems, secure analysis workflows, scalable tooling for life systems research."]
+                ]
+            },
+            underwater: {
+                name: "FrostAura Underwater",
+                imply: "Elite underwater operations, training, adventure, field capability.",
+                mission: "Build an elegant underwater operating platform across dive centers, training, field services, and expedition support.",
+                focus: [
+                    "Commercial ocean-facing engine with real-world operations and public visibility.",
+                    "Home for dive centers, training and certification, guided operations, and selective underwater services.",
+                    "Can support exploration missions and future ocean partnerships."
+                ],
+                projects: ["Dive center operations", "Training and certification", "Underwater services", "Expedition support"],
+                cross: ["Exploration", "Industries", "Foundation"],
+                roles: [
+                    ["Division Director", "Operational excellence, service design, safety culture, network growth, premium experience quality."],
+                    ["Senior Dive Operations Lead", "Training standards, field leadership, safety protocols, mission execution."],
+                    ["Expedition Systems Manager", "Coordinates logistics, equipment readiness, permits, and on-site field support."],
+                    ["Partnerships Lead", "Builds destination relationships, expedition alliances, and premium commercial opportunities."]
+                ]
+            },
+            exploration: {
+                name: "FrostAura Exploration",
+                imply: "Discovery, frontier missions, archaeology, truth-seeking.",
+                mission: "Pursue discovery through marine archaeology, deep-ocean missions, mapping, and research partnerships.",
+                focus: [
+                    "Translates field capability into knowledge, culture, and documented discovery.",
+                    "Builds research-grade missions and strategic partnerships across archaeology, mapping, and ocean exploration.",
+                    "Creates public fascination, institutional credibility, and long-horizon discovery value."
+                ],
+                projects: ["Marine archaeology", "Discovery missions", "Survey and mapping", "Research documentation and partnerships"],
+                cross: ["Underwater", "Industries", "Foundation", "TaleWeaver"],
+                roles: [
+                    ["Division Director", "Mission design, research partnerships, safety and science balance, public credibility."],
+                    ["Lead Marine Archaeologist", "Field interpretation, site stewardship, research method, scholarly collaboration."],
+                    ["Expedition Research Lead", "Turns missions into datasets, documentation, narratives, and external outputs."],
+                    ["Survey Systems Engineer", "Mapping, sensing, instrumentation, data quality, technical support in the field."]
+                ]
+            },
+            labs: {
+                name: "FrostAura Labs",
+                imply: "Moonshots, stealth R&D, future strategic capability.",
+                mission: "Incubate high-risk future capability through advanced concepts, frontier AI, stealth prototypes, and experimental programs.",
+                focus: [
+                    "Long-range internal R&D unit for projects not yet ready for public positioning or commercial packaging.",
+                    "Can incubate advanced defense concepts, radical AI systems, or sensitive pre-commercial work.",
+                    "Feeds mature programs into Technologies, Industries, Helix, or Ventures."
+                ],
+                projects: ["Moonshots", "Frontier AI", "Stealth prototypes", "Advanced systems", "Radical longevity pathways"],
+                cross: ["Technologies", "Industries", "Helix", "Ventures"],
+                roles: [
+                    ["Lab Director", "Research portfolio design, technical direction, discretion, long-range prioritization."],
+                    ["Principal Research Engineer", "Rapid prototyping, theory-to-system translation, deep technical curiosity, rigor."],
+                    ["Systems Prototyping Lead", "Builds proof-of-capability across software, hardware, and integration layers."],
+                    ["Strategic Programs Lead", "Coordinates sensitive work, timelines, dependencies, and mission-critical reporting."]
+                ]
+            },
+            ventures: {
+                name: "FrostAura Ventures",
+                imply: "Portfolio building, incubation, ownership, spin-outs.",
+                mission: "Create, hold, scale, and selectively acquire companies that prove durable and strategically aligned with FrostAura.",
+                focus: [
+                    "Receives mature internal programs that deserve standalone company treatment.",
+                    "Builds venture design, venture readiness, and portfolio management muscle.",
+                    "Acts as the commercial expansion logic of the architecture."
+                ],
+                projects: ["Spin-outs from internal programs", "New venture formation", "Acquisitions", "Strategic investments"],
+                cross: ["Technologies", "Labs", "Capital strategy"],
+                roles: [
+                    ["Venture Lead / GM", "Company formation judgment, operating design, founder support, scaling discipline."],
+                    ["Strategy and Capital Lead", "Deal sourcing, market mapping, diligence, portfolio logic, resource allocation."],
+                    ["Product Incubation Lead", "Shapes new concepts into investable or scalable venture theses."],
+                    ["Corporate Development Lead", "Partnerships, acquisitions, transaction coordination, integration thinking."]
+                ]
+            },
+            foundation: {
+                name: "FrostAura Foundation",
+                imply: "Stewardship, legitimacy, impact, giving back.",
+                mission: "Convert commercial success into visible public good through education, science, ocean initiatives, and humanitarian programs.",
+                focus: [
+                    "Anchors the moral purpose of the system with concrete impact.",
+                    "Can support scholarships, science and ocean programs, community initiatives, and mission-aligned sponsorships.",
+                    "Creates a durable bridge between capability and contribution."
+                ],
+                projects: ["Education and scholarships", "Ocean and science programs", "Community support", "Humanitarian initiatives"],
+                cross: ["Underwater", "Exploration", "Helix", "Brand"],
+                roles: [
+                    ["Foundation Director", "Program strategy, stewardship, partner relationships, governance judgment."],
+                    ["Impact Programs Lead", "Runs initiatives with discipline, metrics, and visible execution quality."],
+                    ["Partnerships and Grant Manager", "Coordinates sponsors, collaborators, grant structures, and reporting."],
+                    ["Impact Operations Lead", "Process, budgets, documentation, and sustainable execution."]
+                ]
+            }
+        };
+
+        const PROJECTS = [
+            {
+                name: "Life OS",
+                company: "FrostAura Technologies",
+                thesis: "A software-first platform for personal and operational clarity, designed to help people run life with more intention and control.",
+                projectType: "Product system",
+                cross: ["Technologies -> core build", "Helix -> health and optimization pathways", "Ventures -> possible future spin-out"]
+            },
+            {
+                name: "TaleWeaver",
+                company: "FrostAura Technologies",
+                thesis: "A narrative and media-tech system designed to turn stories, structure, and synthesis into a product experience.",
+                projectType: "Narrative platform",
+                cross: ["Technologies -> product execution", "Ventures -> standalone brand path", "Exploration -> documentary and storytelling potential"]
+            },
+            {
+                name: "FrostAura Startup",
+                company: "FrostAura Technologies",
+                thesis: "A startup digital twin and operating software concept that turns planning, structure, and execution into a living company system.",
+                projectType: "Operating platform",
+                cross: ["Technologies -> build and revenue", "Ventures -> future product company", "Consolidated -> internal operating layer"]
+            },
+            {
+                name: "Enterprise AI Systems",
+                company: "FrostAura Technologies",
+                thesis: "Applied AI, automation, security, and software systems that generate operating cash flow and strategic capability early.",
+                projectType: "Revenue engine",
+                cross: ["All divisions -> shared intelligence", "Labs -> future technical depth", "Consolidated -> cash flow and control"]
+            },
+            {
+                name: "Robotics and Autonomy",
+                company: "FrostAura Industries",
+                thesis: "Embodied capability across drones, robotics, control systems, and mission-specific hardware.",
+                projectType: "Hard-tech platform",
+                cross: ["Industries -> build", "Technologies -> autonomy and data", "Underwater / Exploration -> field deployment"]
+            },
+            {
+                name: "Protein Folding AI",
+                company: "FrostAura Helix",
+                thesis: "A computational life systems program exploring protein understanding, biological modeling, and long-horizon therapeutic potential.",
+                projectType: "Bio-AI program",
+                cross: ["Helix -> research core", "Technologies -> data and ML systems", "Labs -> frontier capability"]
+            },
+            {
+                name: "Underwater Network",
+                company: "FrostAura Underwater",
+                thesis: "An elegant international underwater operations and training platform with room for premium services, expeditions, and growth.",
+                projectType: "Operational platform",
+                cross: ["Underwater -> commercial engine", "Exploration -> field support", "Foundation -> ocean and education initiatives"]
+            },
+            {
+                name: "Marine Archaeology Missions",
+                company: "FrostAura Exploration",
+                thesis: "Research and discovery missions built to surface new truths, protected history, and public fascination.",
+                projectType: "Discovery program",
+                cross: ["Exploration -> mission core", "Underwater -> operations", "TaleWeaver -> narrative output"]
+            }
+        ];
+
+        const CONTEXTS = {
+            default: {
+                eyebrow: "FrostAura | Long-horizon company architecture",
+                title: "We build the future of human capability.",
+                text: "FrostAura is a long-horizon company architecture built to turn ambition into enduring progress across software, AI, hard tech, exploration, life systems, and public good.",
+                cta: { label: "Meet the people we hire", href: "#careers" },
+                topButton: { label: "Careers", href: "#careers" }
+            },
+            careers: {
+                eyebrow: "careers.frostaura.net | Senior builders wanted",
+                title: "Build elegant, difficult things with a company architecture built for range.",
+                text: "FrostAura hires leaders, principal engineers, senior researchers, and operators who can own systems, raise standards, and create leverage across multiple company lines.",
+                cta: { label: "Start your application", href: "#careers" },
+                topButton: { label: "Apply", href: "#careers" }
+            },
+            investors: {
+                eyebrow: "investors.frostaura.net | Long-horizon partners",
+                title: "A disciplined company architecture for aligned capital and capability.",
+                text: "FrostAura combines operating cash flow, frontier optionality, venture formation, and visible public-good intent into one coherent long-range system.",
+                cta: { label: "Share your investment thesis", href: "#investors" },
+                topButton: { label: "Investor intake", href: "#investors" }
+            }
+        };
+
+        const ROUTES = ["home", "architecture", "projects", "careers", "investors"];
+
+        function getContextKey() {
+            const host = window.location.hostname.toLowerCase();
+            if (host.startsWith("careers.")) return "careers";
+            if (host.startsWith("investors.")) return "investors";
+            return "default";
+        }
+
+        function applyContext() {
+            const context = CONTEXTS[getContextKey()];
+            document.getElementById("contextEyebrow").textContent = context.eyebrow;
+            document.getElementById("heroTitle").textContent = context.title;
+            document.getElementById("heroText").textContent = context.text;
+            const heroSecondary = document.getElementById("heroSecondary");
+            heroSecondary.textContent = context.cta.label;
+            heroSecondary.setAttribute("href", context.cta.href);
+            const contextCta = document.getElementById("contextCta");
+            contextCta.textContent = context.topButton.label;
+            contextCta.setAttribute("href", context.topButton.href);
+        }
+
+        function defaultRouteForHost() {
+            const key = getContextKey();
+            if (key === "careers") return "careers";
+            if (key === "investors") return "investors";
+            return "home";
+        }
+
+        function navigateToHash(hash, replace = false) {
+            const normalized = hash.replace("#", "") || defaultRouteForHost();
+            const finalHash = ROUTES.includes(normalized) ? normalized : "home";
+            const target = document.getElementById(finalHash);
+            if (!target) return;
+            if (replace) {
+                history.replaceState(null, "", "#" + finalHash);
+            }
+            requestAnimationFrame(() => {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+        }
+
+        function updateActiveNav() {
+            const sections = [...document.querySelectorAll(".route-section")];
+            const threshold = window.innerHeight * 0.34;
+            let current = "home";
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= threshold && rect.bottom >= threshold) {
+                    current = section.id;
+                }
+            });
+            document.querySelectorAll(".nav a").forEach(link => {
+                link.classList.toggle("active", link.dataset.nav === current);
+            });
+        }
+
+        function buildDetailPanel(key) {
+            const company = COMPANY_DATA[key];
+            const roleCards = company.roles.map(([title, competency]) => `
+        <article class="role-card">
+          <h4>${title}</h4>
+          <p>${competency}</p>
+        </article>
+      `).join("");
+
+            const detailCards = `
+        <article class="detail-card">
+          <h4>What the name implies</h4>
+          <p>${company.imply}</p>
+        </article>
+        <article class="detail-card">
+          <h4>Core mission</h4>
+          <p>${company.mission}</p>
+        </article>
+        <article class="detail-card">
+          <h4>Typical programs</h4>
+          <ul>${company.projects.map(item => `<li>${item}</li>`).join("")}</ul>
+        </article>
+      `;
+
+            const focusList = company.focus.map(item => `<li>${item}</li>`).join("");
+            const crossTags = company.cross.map(item => `<span class="tag">${item}</span>`).join("");
+
+            return `
+        <div class="detail-header">
+          <div class="detail-topline">Selected company</div>
+          <h3>${company.name}</h3>
+          <div class="subtitle">${company.mission}</div>
+        </div>
+        <div class="detail-grid">${detailCards}</div>
+        <article class="detail-card">
+          <h4>Operating role inside FrostAura</h4>
+          <ul>${focusList}</ul>
+        </article>
+        <div>
+          <div class="detail-topline">Lean leadership and senior talent model</div>
+          <div class="roles-grid">${roleCards}</div>
+        </div>
+        <div>
+          <div class="detail-topline">Cross-ties</div>
+          <div class="tag-row">${crossTags}</div>
+        </div>
+      `;
+        }
+
+        function renderProjects() {
+            const container = document.getElementById("projectCarousel");
+            container.innerHTML = PROJECTS.map(project => `
+        <article class="project-card">
+          <div class="project-top">
+            <div>
+              <div class="path">${project.company}</div>
+              <h3>${project.name}</h3>
+            </div>
+            <span class="tag">${project.projectType}</span>
+          </div>
+          <p>${project.thesis}</p>
+          <div class="cross">
+            <strong>Cross-ties</strong>
+            <div class="tag-row">
+              ${project.cross.map(item => `<span class="tag">${item}</span>`).join("")}
+            </div>
+          </div>
+        </article>
+      `).join("");
+        }
+
+        function bindArchitecture() {
+            const detailPanel = document.getElementById("detailPanel");
+            const buttons = document.querySelectorAll("#treeNav button");
+            function setCompany(key) {
+                buttons.forEach(button => button.classList.toggle("active", button.dataset.company === key));
+                detailPanel.innerHTML = buildDetailPanel(key);
+            }
+            buttons.forEach(button => {
+                button.addEventListener("click", () => setCompany(button.dataset.company));
+            });
+            setCompany("consolidated");
+        }
+
+        function bindCarousel() {
+            const track = document.getElementById("projectCarousel");
+            const prev = document.getElementById("projectsPrev");
+            const next = document.getElementById("projectsNext");
+
+            const scrollCard = (direction) => {
+                const first = track.querySelector(".project-card");
+                const delta = first ? first.getBoundingClientRect().width + 16 : 320;
+                track.scrollBy({ left: delta * direction, behavior: "smooth" });
+            };
+
+            prev.addEventListener("click", () => scrollCard(-1));
+            next.addEventListener("click", () => scrollCard(1));
+
+            let auto = setInterval(() => scrollCard(1), 6400);
+            track.addEventListener("mouseenter", () => clearInterval(auto));
+            track.addEventListener("mouseleave", () => {
+                clearInterval(auto);
+                auto = setInterval(() => scrollCard(1), 6400);
+            });
+        }
+
+        function serializeForm(form) {
+            const data = {};
+            const formData = new FormData(form);
+            for (const [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) data[key].push(value);
+                    else data[key] = [data[key], value];
+                } else {
+                    data[key] = value;
+                }
+            }
+            data.submitted_at = new Date().toISOString();
+            data.submitted_from = window.location.href;
+            data.host = window.location.hostname || "local";
+            return data;
+        }
+
+        function validateCurrentStep(form, index) {
+            const step = form.querySelector(`.form-step[data-step="${index}"]`);
+            if (!step) return true;
+            const controls = [...step.querySelectorAll("input, select, textarea")];
+            for (const control of controls) {
+                if (!control.checkValidity()) {
+                    control.reportValidity();
+                    return false;
+                }
+            }
+            const groups = [...step.querySelectorAll("[data-required-group]")];
+            for (const group of groups) {
+                const checked = group.querySelectorAll('input[type="checkbox"]:checked').length;
+                if (checked === 0) {
+                    const label = group.querySelector("label");
+                    const message = label ? `Please choose at least one option for "${label.textContent.trim()}".` : "Please choose at least one option.";
+                    return message;
+                }
+            }
+            return true;
+        }
+
+        function openMailto(kind, payload) {
+            const recipient = kind === "careers" ? "careers@frostaura.net" : "investors@frostaura.net";
+            const subjectPrefix = kind === "careers" ? "FrostAura Careers Submission" : "FrostAura Investor Submission";
+            const subject = `${subjectPrefix} - ${payload.full_name || payload.organization || "New submission"}`;
+            const body = [
+                `A structured ${kind} submission was prepared from the FrostAura landing page.`,
+                "",
+                "Summary:",
+                JSON.stringify(payload, null, 2),
+                "",
+                "Please attach the downloaded JSON packet when replying if needed."
+            ].join("\n");
+            window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.slice(0, 1700))}`;
+        }
+
+        function downloadPayload(kind, payload) {
+            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `frostaura-${kind}-submission-${stamp}.json`;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        async function submitPayload(kind, payload) {
+            const endpointMap = window.FROSTAURA_ENDPOINTS || {};
+            const endpoint = endpointMap[kind] || "";
+            if (endpoint) {
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) {
+                    throw new Error(`Endpoint submission failed with ${response.status}`);
+                }
+                return "endpoint";
+            }
+            downloadPayload(kind, payload);
+            openMailto(kind, payload);
+            return "static";
+        }
+
+        function bindMultiStep(formId, kind) {
+            const form = document.getElementById(formId);
+            const steps = [...form.querySelectorAll(".form-step")];
+            const progress = [...document.querySelectorAll(`#${kind}Progress .progress-step`)];
+            const message = document.getElementById(`${kind}Message`);
+            const nextButton = form.querySelector('[data-action="next"]');
+            const backButton = form.querySelector('[data-action="back"]');
+            let index = 0;
+
+            function renderStep() {
+                steps.forEach((step, stepIndex) => step.classList.toggle("active", stepIndex === index));
+                progress.forEach((item, stepIndex) => item.classList.toggle("active", stepIndex === index));
+                backButton.disabled = index === 0;
+                nextButton.textContent = index === steps.length - 1 ? "Submit" : "Next";
+            }
+
+            backButton.addEventListener("click", () => {
+                message.textContent = "";
+                index = Math.max(0, index - 1);
+                renderStep();
+            });
+
+            nextButton.addEventListener("click", async () => {
+                message.textContent = "";
+                const valid = validateCurrentStep(form, index);
+                if (valid !== true) {
+                    message.textContent = typeof valid === "string" ? valid : "Please complete the required fields.";
+                    return;
+                }
+
+                if (index < steps.length - 1) {
+                    index += 1;
+                    renderStep();
+                    return;
+                }
+
+                nextButton.disabled = true;
+                backButton.disabled = true;
+                message.textContent = "Packaging your submission...";
+                try {
+                    const payload = serializeForm(form);
+                    const mode = await submitPayload(kind, payload);
+                    if (mode === "endpoint") {
+                        message.textContent = "Submission sent successfully. FrostAura will review it shortly.";
+                    } else {
+                        message.textContent = "Submission packaged successfully. A JSON packet was downloaded and an email handoff has been prepared.";
+                    }
+                    form.reset();
+                    index = 0;
+                    renderStep();
+                } catch (error) {
+                    console.error(error);
+                    message.textContent = "Direct delivery failed. Your packet will still be packaged locally for email handoff.";
+                    const payload = serializeForm(form);
+                    downloadPayload(kind, payload);
+                    openMailto(kind, payload);
+                    form.reset();
+                    index = 0;
+                    renderStep();
+                } finally {
+                    nextButton.disabled = false;
+                    backButton.disabled = false;
+                }
+            });
+
+            renderStep();
+        }
+
+        function setInitialRoute() {
+            const current = window.location.hash.replace("#", "");
+            const fallback = defaultRouteForHost();
+            if (!current || !ROUTES.includes(current)) {
+                history.replaceState(null, "", "#" + fallback);
+            }
+            navigateToHash(window.location.hash || "#" + fallback, true);
+        }
+
+        function bindHashRouting() {
+            window.addEventListener("hashchange", () => {
+                navigateToHash(window.location.hash || "#home");
+            });
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener("click", (event) => {
+                    const targetHash = anchor.getAttribute("href");
+                    if (!targetHash || targetHash === "#") return;
+                    event.preventDefault();
+                    history.pushState(null, "", targetHash);
+                    navigateToHash(targetHash);
+                });
+            });
+        }
+
+        function bindReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.14 });
+
+            document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+        }
+
+        function bindParallax() {
+            const update = () => {
+                document.documentElement.style.setProperty("--scrollY", `${window.scrollY}px`);
+                updateActiveNav();
+            };
+            update();
+            window.addEventListener("scroll", update, { passive: true });
+            window.addEventListener("resize", update);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            applyContext();
+            renderProjects();
+            bindArchitecture();
+            bindCarousel();
+            bindMultiStep("careersForm", "careers");
+            bindMultiStep("investorsForm", "investors");
+            bindReveal();
+            bindHashRouting();
+            setInitialRoute();
+            bindParallax();
+            updateActiveNav();
+        });
+    </script>
+</body>
+
+</html>

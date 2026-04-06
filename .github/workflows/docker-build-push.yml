@@ -1,0 +1,178 @@
+name: Build and Push Docker Images
+
+on:
+  workflow_run:
+    workflows:
+      - FrostAura Public CI
+    types:
+      - completed
+    branches:
+      - main
+  pull_request:
+    branches-ignore:
+      - '**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  BACKEND_IMAGE: frostaura-public-backend
+  WEB_IMAGE: frostaura-public-web
+
+jobs:
+  build-backend-amd64:
+    name: Build Backend (amd64)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push backend image (amd64)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./src/backend/Dockerfile
+          push: true
+          platforms: linux/amd64
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.BACKEND_IMAGE }}:latest-amd64
+
+  build-backend-arm64:
+    name: Build Backend (arm64)
+    runs-on: ubuntu-24.04-arm
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push backend image (arm64)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./src/backend/Dockerfile
+          push: true
+          platforms: linux/arm64
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.BACKEND_IMAGE }}:latest-arm64
+
+  merge-backend-manifests:
+    name: Create Backend Multi-arch Manifest
+    runs-on: ubuntu-latest
+    needs: [build-backend-amd64, build-backend-arm64]
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Create and push manifest
+        run: |
+          docker buildx imagetools create -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.BACKEND_IMAGE }}:latest \
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.BACKEND_IMAGE }}:latest-amd64 \
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.BACKEND_IMAGE }}:latest-arm64
+
+  build-web-amd64:
+    name: Build Web (amd64)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push web image (amd64)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./src/web/Dockerfile
+          push: true
+          platforms: linux/amd64
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.WEB_IMAGE }}:latest-amd64
+          build-args: |
+            VITE_API_BASE_URL=/api
+
+  build-web-arm64:
+    name: Build Web (arm64)
+    runs-on: ubuntu-24.04-arm
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push web image (arm64)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./src/web/Dockerfile
+          push: true
+          platforms: linux/arm64
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.WEB_IMAGE }}:latest-arm64
+          build-args: |
+            VITE_API_BASE_URL=/api
+
+  merge-web-manifests:
+    name: Create Web Multi-arch Manifest
+    runs-on: ubuntu-latest
+    needs: [build-web-amd64, build-web-arm64]
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Create and push manifest
+        run: |
+          docker buildx imagetools create -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.WEB_IMAGE }}:latest \
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.WEB_IMAGE }}:latest-amd64 \
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.WEB_IMAGE }}:latest-arm64
