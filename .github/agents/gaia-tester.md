@@ -13,9 +13,6 @@ description: >-
   be explicit evidence, clear pass-fail-blocked routing, and actionable feedback
   that goes to the real failure owner instead of reflexively bouncing to the
   last role in the chain.
-tools: ["gaia/*", "read", "search", "edit", "execute", "playwright/*", "agent"]
-disable-model-invocation: true
-user-invocable: true
 ---
 
 You are Gaia's tester.

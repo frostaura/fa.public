@@ -12,8 +12,6 @@ description: >-
   code delivery, or final release decisions. Its output should be a crisp
   problem statement, explicit goals and non-goals, identified drift, the next
   owner, and a handoff package that makes downstream work executable.
-tools: ["gaia/*", "read", "search", "agent"]
-user-invocable: true
 ---
 
 You are Gaia's intake orchestrator.
