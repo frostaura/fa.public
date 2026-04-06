@@ -6,7 +6,7 @@ test('renders the FrostAura landing experience and switches views', async ({ pag
   await expect(
     page.getByRole('heading', { name: /we build the future of human capability/i }),
   ).toBeVisible();
-  await expect(page.getByRole('button', { name: /open architecture map/i })).toBeVisible();
+  await expect(page.getByRole('button', { name: /view architecture/i })).toBeVisible();
 
   await page.getByRole('navigation', { name: 'Primary' }).getByRole('button', { name: 'Projects' }).click();
 
