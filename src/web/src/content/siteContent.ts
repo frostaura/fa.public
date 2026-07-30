@@ -98,7 +98,7 @@ export const companyContent: Record<(typeof companyOrder)[number], CompanyConten
       'AI and data platforms that accelerate the rest of FrostAura.',
       'Elegant product execution with a bias toward real-world leverage.',
     ],
-    projects: ['Life OS', 'TaleWeaver', 'FrostAura Startup', 'Enterprise AI systems'],
+    projects: ['Life OS', 'FrostAura Startup', 'Enterprise AI systems'],
     cross: ['Industries', 'Helix', 'Labs', 'All internal systems'],
     roles: [
       ['Principal Platform Engineer', 'Distributed systems, reliability, product architecture, and security.'],
@@ -207,7 +207,7 @@ export const companyContent: Record<(typeof companyOrder)[number], CompanyConten
       'Connects discovery to cultural, scientific, and storytelling impact.',
     ],
     projects: ['Marine archaeology', 'Discovery missions', 'Survey and mapping', 'Research documentation'],
-    cross: ['Underwater', 'Industries', 'Foundation', 'TaleWeaver'],
+    cross: ['Underwater', 'Industries', 'Foundation'],
     roles: [
       ['Lead Marine Archaeologist', 'Field interpretation, site stewardship, and scholarly rigor.'],
       ['Expedition Research Lead', 'Turns missions into datasets and narratives.'],
@@ -320,20 +320,6 @@ export const projectContent: ProjectContent[] = [
     blueprint: 'Placed in Technologies today, with a Ventures path if it matures into a standalone company.',
   },
   {
-    name: 'TaleWeaver',
-    company: 'FrostAura Technologies',
-    thesis:
-      'A narrative and media-tech system that turns stories, structure, and synthesis into a durable product experience.',
-    projectType: 'Narrative platform',
-    stage: 'Brand + product design',
-    horizon: 'Standalone media-tech path',
-    energy: 'Narrative into venture value',
-    cross: ['Technologies -> product execution', 'Ventures -> standalone brand path', 'Exploration -> documentary output'],
-    portfolioRole: 'Turns FrostAura narrative quality into product leverage and future media-company optionality.',
-    whyNow: 'Narrative systems can elevate product quality, documentary output, and public fascination before the broader portfolio is fully visible.',
-    blueprint: 'A Technologies-native build today with a clean spin-out route through Ventures later.',
-  },
-  {
     name: 'FrostAura Startup',
     company: 'FrostAura Technologies',
     thesis:
@@ -412,7 +398,7 @@ export const projectContent: ProjectContent[] = [
     stage: 'Mission planning',
     horizon: 'Research + storytelling arc',
     energy: 'Fieldwork into public wonder',
-    cross: ['Exploration -> mission core', 'Underwater -> operations', 'TaleWeaver -> narrative output'],
+    cross: ['Exploration -> mission core', 'Underwater -> operations'],
     portfolioRole: 'Turns field capability into truth-seeking, cultural value, and public fascination.',
     whyNow: 'Exploration is where FrostAura becomes more than a business portfolio and starts to matter in the world.',
     blueprint: 'The blueprint positions exploration as discovery, stewardship, and documentary-grade mission work.',
