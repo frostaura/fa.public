@@ -13,7 +13,9 @@ _Last verified: 2026-08-21 — `git log`, branch, upstream, ahead/behind, unpush
 
 **One content change has landed since**: `d0efbd4` (2026-07-30) removed the retired TaleWeaver project from `src/web/src/content/siteContent.ts` and the imported landing-page reference. That is the only evidence anyone has looked at this site in four months, and it corrected exactly one of the site's several registry mismatches — see the watch list.
 
-Working tree clean; **ahead-only and unpushed**, `origin/main` 0 behind — a clean fast-forward whenever the founder pushes.
+**Ahead-only and unpushed**, `origin/main` 0 behind — a clean fast-forward whenever the founder pushes.
+
+**The working tree is NOT clean, and must not be tidied.** 55 uncommitted paths as of 2026-08-21: 52 staged deletions — the whole vendored `.github/skills`, `.github/agents`, `.github/mcp*`, `.agaia-workflows` and `mcp-config.json` set — plus modified `CLAUDE.md`, `AGENTS.md` and `memory/gotchas.md`. It is the recorded de-vendoring, staged and **un-ratified pending founder review** (see the gotchas topic). `git checkout`, `clean`, `stash`, `restore` or `reset` here destroys it.
 
 The scaffold is coherent: React 19 SPA under `src/web/`, Redux Toolkit + RTK Query, six components, vendored brand assets, a five-project .NET 10 backend under `src/backend/`, Docker Compose with MailHog, and multi-arch image publishing. But e2e coverage is **a single spec** (`tests/e2e/public-site.spec.ts`), `public/` is empty, and `docs/` is three files untouched since the scaffold.
 

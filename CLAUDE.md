@@ -38,7 +38,17 @@ npm scripts mirror this: `dev`, `dev:api`, `build` (`build:web` + `build:api`), 
 ## Dependencies on other FrostAura projects
 None at runtime. The SMTP key shape is borrowed from `fa.lifeos` as convention only.
 
-## Upkeep
-This repo's `CLAUDE.md`, `MEMORY.md` and any local `.claude/skills/` are kept current **as changes land** — part of the change, not follow-up work. `MEMORY.md` is required here exactly as `CLAUDE.md` is, and cascades downward identically; a `CLAUDE.md` with no `MEMORY.md` beside it is a defect.
+## Skills
 
-Update the memory store at the end of any session that shipped, decided, discovered or abandoned something, and restamp `last_verified:` only for what you actually inspected. This file changes only when a rule changes — a status belongs in `MEMORY.md`. A skill that no longer matches how work is really done here is fixed or deleted, not left to rot. The standard is [`/docs/operating/context-cascade.md`](../../../docs/operating/context-cascade.md).
+Because this is the brand's front door, the root local skill `brand-compliance` governs every copy and visual change here and outranks any engineering convenience. That one *is* a file in this tree, so its name is safe to cite directly.
+
+From the installed Gaia plugins: the UI-engineering capability for the React surface (e.g. `fa-engineering-ui`), and the mandated-stack baseline for the two open deviations — SQLite and no design system (e.g. `fa-engineering-default-tech-stack`); read it before treating either as settled.
+
+**Reference a plugin capability by what it does, naming the current skill only as an example — never as the identifier, never by path.** Plugin skills are not files in this repo, so nothing links to them, no checker sees a rename, and a bare name goes dead silently.
+
+This repo carries **no local `.claude/skills/`** and must not reacquire one. Forking a plugin procedure in here is prohibited outright; the reasoning, and what the last such set cost, are in `MEMORY.md`.
+
+## Upkeep
+Three artifacts are kept current **as changes land**, not in a later pass: this `CLAUDE.md`, [`MEMORY.md`](MEMORY.md) with its `memory/` topic store, and the skills layer above (empty by decision). `MEMORY.md` is required here exactly as `CLAUDE.md` is, and cascades downward identically; a `CLAUDE.md` with no `MEMORY.md` beside it is a defect.
+
+Update the memory store at the end of any session that shipped, decided, discovered or abandoned something, and restamp `last_verified:` only for what you actually inspected. This file changes only when a rule changes — a status belongs in `MEMORY.md`. A stale plugin procedure is fixed upstream and reinstalled, never forked back in here. The standard is [`/docs/operating/context-cascade.md`](../../../docs/operating/context-cascade.md).
