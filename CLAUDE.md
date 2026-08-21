@@ -39,4 +39,6 @@ npm scripts mirror this: `dev`, `dev:api`, `build` (`build:web` + `build:api`), 
 None at runtime. The SMTP key shape is borrowed from `fa.lifeos` as convention only.
 
 ## Upkeep
-This repo's `CLAUDE.md`, `MEMORY.md` and any `.claude/skills/` are kept current as changes land — treat them as part of the change, not as follow-up. Update `MEMORY.md` at the end of any session that shipped, decided, discovered or abandoned something, and refresh `_Last verified_` only when you actually inspected. A skill that no longer matches how work is really done here is fixed or deleted, not left to rot. The standard is [`/docs/operating/context-cascade.md`](../../../docs/operating/context-cascade.md).
+This repo's `CLAUDE.md`, `MEMORY.md` and any local `.claude/skills/` are kept current **as changes land** — part of the change, not follow-up work. `MEMORY.md` is required here exactly as `CLAUDE.md` is, and cascades downward identically; a `CLAUDE.md` with no `MEMORY.md` beside it is a defect.
+
+Update the memory store at the end of any session that shipped, decided, discovered or abandoned something, and restamp `last_verified:` only for what you actually inspected. This file changes only when a rule changes — a status belongs in `MEMORY.md`. A skill that no longer matches how work is really done here is fixed or deleted, not left to rot. The standard is [`/docs/operating/context-cascade.md`](../../../docs/operating/context-cascade.md).
