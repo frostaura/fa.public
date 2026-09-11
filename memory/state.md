@@ -15,7 +15,7 @@ _Verified 2026-09-11 by inspection: `git log`, branch, remote, `rev-list --left-
 
 The 2026-07-30 content change removed the retired TaleWeaver project from `src/web/src/content/siteContent.ts` and from the imported landing-page reference. It is the only evidence anyone has opened this site since April, and it corrected exactly one of the site's registry mismatches — see the watch list.
 
-The scaffold itself is coherent: React 19 SPA under `src/web/`, Redux Toolkit + RTK Query, a small hand-rolled component set, vendored brand assets, a .NET 10 backend under `src/backend/`, Docker Compose with MailHog, and multi-arch image publishing. **The gates are thin rather than absent** — e2e is a single spec (`tests/e2e/public-site.spec.ts`) and the backend suite is two real test files (`SubmissionEndpointsTests.cs`, `EmailSettingsTests.cs`); `public/` is empty, and `docs/` has not been touched since the scaffold.
+The scaffold itself is coherent: React 19 SPA under `src/web/`, Redux Toolkit + RTK Query, a small hand-rolled component set, vendored brand assets, a .NET 10 backend under `src/backend/`, Docker Compose with MailHog, and multi-arch image publishing. **The gates are thin rather than absent** — one e2e spec walking the public site (`tests/e2e/public-site.spec.ts`), and a backend suite whose reach is the submission endpoints and the email-settings binding, with nothing else covered; `public/` is empty, and `docs/` has not been touched since the scaffold.
 
 Nothing is deployed. Image publishing stops at Docker Hub — the FrostAura deploy chain does not complete here (gotchas).
 
