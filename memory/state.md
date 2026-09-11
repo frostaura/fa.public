@@ -1,22 +1,22 @@
 ---
 name: fa-public-state
-description: "Early scaffold; engineering untouched since 2026-04-06 — most dormant in the division — with one 2026-07-30 content edit; coherent React 19 + .NET 10 shape; ahead-only, unpushed"
+description: "Early scaffold; engineering untouched since 2026-04-06, one content edit 2026-07-30; local main and origin/main are the same commit — no push decision pending and no un-ratified change set here"
 type: state
-last_verified: 2026-08-21
+last_verified: 2026-09-11
 ---
 
 # Current state
 
-_Last verified: 2026-08-21 — `git log`, branch, upstream, ahead/behind, unpushed diff and working tree re-measured. The `package.json`, `.csproj` set and both CI workflows were inspected 2026-07-24 and no commit has touched them since._
+_Verified 2026-09-11 by inspection: `git log`, branch, remote, `rev-list --left-right @{u}...HEAD`, `status --porcelain`, a `.git` lock sweep, the `.csproj` set, `package.json`, both CI workflows and the site content file._
 
-**Early scaffold, engineering effectively abandoned.** Eleven commits total. The last *engineering* commit is **Mon 6 April 2026** (`a1279a7 fix: remove missing public copy from web image`) — 4.5 months idle, the most dormant project in the division. Two separate "initial commit"s and a commit literally titled `repeat` mark a messy, unreviewed start.
+**Early scaffold, engineering effectively abandoned.** The last commit touching `src/` is **Thu 30 July 2026** (`d0efbd4`) and it was content, not engineering; the last *engineering* commit is **Mon 6 April 2026** (`a1279a7 fix: remove missing public copy from web image`). The history is short and was started twice — two separate "initial commit"s and a commit titled `repeat`.
 
-**One content change has landed since**: `d0efbd4` (2026-07-30) removed the retired TaleWeaver project from `src/web/src/content/siteContent.ts` and the imported landing-page reference. That is the only evidence anyone has looked at this site in four months, and it corrected exactly one of the site's several registry mismatches — see the watch list.
+**Git topology: nothing outstanding.** Local `main` and `origin/main` are the same commit — neither ahead nor behind — and the working tree is clean apart from the context edits of the session writing this. No `.git` lock debris. The removal of the vendored Gaia tree and MCP fork was **committed and pushed here** (`7c16d46`, 2026-08-21), so this repo carries no staged, un-ratified change set: `.github/` tracks only its two workflow files. There is no push decision pending on this repo at all.
 
-**Ahead-only and unpushed**, `origin/main` 0 behind — a clean fast-forward whenever the founder pushes.
+The 2026-07-30 content change removed the retired TaleWeaver project from `src/web/src/content/siteContent.ts` and from the imported landing-page reference. It is the only evidence anyone has opened this site since April, and it corrected exactly one of the site's registry mismatches — see the watch list.
 
-**The working tree is NOT clean, and must not be tidied.** 55 uncommitted paths as of 2026-08-21: 52 staged deletions — the whole vendored `.github/skills`, `.github/agents`, `.github/mcp*`, `.agaia-workflows` and `mcp-config.json` set — plus modified `CLAUDE.md`, `AGENTS.md` and `memory/gotchas.md`. It is the recorded de-vendoring, staged and **un-ratified pending founder review** (see the gotchas topic). `git checkout`, `clean`, `stash`, `restore` or `reset` here destroys it.
+The scaffold itself is coherent: React 19 SPA under `src/web/`, Redux Toolkit + RTK Query, six components, vendored brand assets, a five-project .NET 10 backend under `src/backend/`, Docker Compose with MailHog, and multi-arch image publishing. The gates are thin: e2e is **a single spec** (`tests/e2e/public-site.spec.ts`), the backend suite is **two real test files** (`SubmissionEndpointsTests.cs`, `EmailSettingsTests.cs`), `public/` is empty, and `docs/` is three files untouched since the scaffold.
 
-The scaffold is coherent: React 19 SPA under `src/web/`, Redux Toolkit + RTK Query, six components, vendored brand assets, a five-project .NET 10 backend under `src/backend/`, Docker Compose with MailHog, and multi-arch image publishing. But e2e coverage is **a single spec** (`tests/e2e/public-site.spec.ts`), `public/` is empty, and `docs/` is three files untouched since the scaffold.
+Nothing is deployed. Image publishing stops at Docker Hub — the FrostAura deploy chain does not complete here (gotchas).
 
 Owner: Dean, sole contributor.

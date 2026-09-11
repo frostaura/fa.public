@@ -1,13 +1,13 @@
 ---
 name: fa-public-questions
-description: "SQLite holding PII vs the Postgres mandate; no design system on the brand front door; landing-reference implementation status; zero analytics"
+description: "SQLite holds careers and investor PII against the Postgres mandate and has no backup story; no design system on the brand's front door; zero analytics, so no metric is collectable"
 type: question
-last_verified: 2026-08-21
+last_verified: 2026-09-11
 ---
 
 # Open questions
 
-- **SQLite instead of PostgreSQL.** Re-confirmed 2026-08-21: `Microsoft.EntityFrameworkCore.Sqlite` 10.0.5, no Npgsql package reference anywhere in the repo. Documented in `docs/architecture/system-components.md` as the "first public-site baseline" but never flagged against the parent mandate, and that baseline has now held for 4.5 months while storing careers and investor PII on an unbacked-up single-host volume. Needs an explicit migration trigger, an owner and a backup story. Owner: Dean.
-- **No Tailwind, no shadcn/ui, no design system** on the brand's front door — verified: zero `@radix-ui/*`, no `tailwind.config`, styling is one hand-rolled `src/web/src/styles.css`. This is the one surface where FrostAura's visual posture matters most. Adopt the mandated stack or record a waiver. Owner: Dean, parent-controlled.
-- **Has the imported landing-page reference been implemented?** `docs/references/FrostAura_Public_Landing_Page.html` is the stated visual target; nothing says how close the site is. Owner: Dean.
-- **Success metrics.** Suggested set (organic visits, careers submissions, investor inbound conversion, Lighthouse score, Playwright pass rate) was never committed to — and **no analytics tooling exists in the repo**, so even the suggestions are uncollectable today. Owner: Dean.
+- **SQLite instead of PostgreSQL, holding PII, with no backup.** Re-verified 2026-09-11: `Microsoft.EntityFrameworkCore.Sqlite` 10.0.5 in `FrostAura.Infrastructure` and in the test project, and no Npgsql reference anywhere in the repo. `docs/architecture/system-components.md` calls it the "first public-site baseline" but never flags it against the parent mandate, and that baseline has now held for five months while storing careers and investor submissions on an unreplicated volume. Needs three things, not one: a migration trigger, an owner, and a backup story. Owner: Dean.
+- **No Tailwind, no shadcn/ui, no design system on the brand's front door.** Re-verified 2026-09-11: zero `@radix-ui/*` dependencies, no `tailwind.config`, no `components.json`; styling is one hand-rolled `src/web/src/styles.css`. This is the surface where FrostAura's visual posture matters most. Adopt the mandated stack or record a waiver — the deviation has never been declared either way. Owner: Dean, parent-controlled.
+- **Has the imported landing-page reference been implemented?** `docs/references/FrostAura_Public_Landing_Page.html` is the stated visual target and nothing records how close the site is to it. Cheap to answer by opening both; nobody has. Owner: Dean.
+- **What are the success metrics, and what would collect them?** A suggested set (organic visits, careers submissions, investor inbound conversion, Lighthouse score, Playwright pass rate) was never committed to, and **no analytics tooling exists in the repo** — verified 2026-09-11 by searching the frontend for any analytics or tag script. So even the suggestions are uncollectable today; the instrumentation decision has to come before the metric decision. Owner: Dean.
