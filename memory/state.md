@@ -1,17 +1,17 @@
 ---
 name: fa-public-state
-description: "Early scaffold; engineering untouched since 2026-04-06, one content edit 2026-07-30; ahead-only with no deletions in the unpushed range and no un-ratified change set — a push here is uncomplicated"
+description: "Early scaffold; engineering untouched since 2026-04-06, one content edit 2026-07-30; main was pushed 2026-09-16 and is in sync with origin/main on a clean tree, with no pending git decision of any kind here"
 type: state
 last_verified: 2026-09-16
 ---
 
 # Current state
 
-_Re-verified 2026-09-16 by inspection: `git log`, branch, remote, `rev-list --left-right @{u}...HEAD`, `status --porcelain`, a `.git` lock sweep, the `.csproj` set, `package.json`, `vite.config.ts`, both CI workflows, the test files and the site content file. No `git fetch` was run, so the topology is stated against the tracking ref as it stands._
+_Re-verified 2026-09-16 by inspection: `git log`, branch, remote, `rev-list --left-right @{u}...HEAD`, `status --porcelain`, a `.git` lock sweep, the `.csproj` set, `package.json`, `vite.config.ts`, both CI workflows, the test files and the site content file; the git topology was re-measured that evening, after the push, against the tracking ref it had just refreshed._
 
 **Early scaffold, engineering effectively abandoned.** The last commit touching `src/` is **Thu 30 July 2026** (`d0efbd4`) and it was content, not engineering; the last *engineering* commit is **Mon 6 April 2026** (`a1279a7 fix: remove missing public copy from web image`). The history is short and was started twice — two separate "initial commit"s and a commit titled `repeat`.
 
-**Git topology: ahead-only and uncomplicated.** Nothing behind `origin/main`, no deletions in the unpushed range, and every unpushed commit touches context files only — a plain push fast-forwards and carries no product change. No `.git` lock debris. The removal of the vendored Gaia tree and MCP fork was **committed and pushed here** (`7c16d46`, 2026-08-21), so this repo carries no staged, un-ratified change set: `.github/` tracks only its two workflow files. There is no push decision pending on this repo at all. The 2026-09-16 audit pass deliberately left its own context edits uncommitted for the owner.
+**Git topology: in sync, and the simplest repository in the division.** `main` was fast-forward pushed on 2026-09-16, carrying that day's context work up with it, and `HEAD`, `origin/main` and the tracking ref are now the same commit on a clean working tree with no `.git` lock debris. Nothing is unpushed, nothing is staged, and no push decision is pending here at all. The removal of the vendored Gaia tree and MCP fork was committed and pushed back on 2026-08-21 (`7c16d46`), so this repo has never held the un-ratified change set two of its siblings do: `.github/` tracks only its two workflow files. Treat the in-sync reading as dated rather than permanent — fetch before repeating it.
 
 The 2026-07-30 content change removed the retired TaleWeaver project from `src/web/src/content/siteContent.ts` and from the imported landing-page reference. It is the only evidence anyone has opened this site since April, and it corrected exactly one of the site's registry mismatches — see the watch list.
 
