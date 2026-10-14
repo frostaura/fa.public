@@ -1,7 +1,7 @@
 # MEMORY — Technologies/projects/fa.public
 
-- [Current state](memory/state.md) — Early scaffold; engineering untouched since 2026-04-06, one content edit 2026-07-30; main was pushed 2026-09-16 and is in sync with origin/main on a clean tree, with no pending git decision of any kind here
-- [Live decisions](memory/decisions.md) — Brand artwork is vendored so nothing depends on a machine-local path; SMTP env keys deliberately mirror fa.lifeos; publishing from main is the stated intent but workflow_dispatch is not fenced off
-- [Gotchas](memory/gotchas.md) — The backend gate is real but invisible in ci.yml — it hides in npm scripts; no Portainer step, so the chain stops at Docker Hub; the source-of-truth claim has two homes; an untracked local DB may hold real submissions
-- [Open questions](memory/questions.md) — SQLite holds careers and investor PII against the Postgres mandate, with no backup and no migration path; no design system on the brand's front door; zero analytics; and the site solicits outside capital
-- [Watch list](memory/watch.md) — Four live surfaces claim what the tree does not support — five phantom programmes with delivery stages, six searches into empty divisions, present-tense hiring, revenue as fact — and the higher brand bar is in no gate
+- [Current state](memory/state.md) — Dormant scaffold: engineering untouched since 2026-04-06, last content edit 2026-07-30; CI green and images published to Docker Hub, nothing deployed; public repo, in sync with origin/main on a clean tree
+- [Live decisions](memory/decisions.md) — Brand artwork vendored so nothing depends on a machine path; SMTP keys mirror fa.lifeos; no local skills after the 2026-08-21 de-vendoring; images publish from main by intent, but workflow_dispatch is unfenced
+- [Gotchas](memory/gotchas.md) — Backend gate hides in npm scripts, not ci.yml; every push to main, a context-only push included, republishes :latest; chain stops at Docker Hub; source-of-truth claim lives in two files; decoy asset dirs
+- [Open questions](memory/questions.md) — SQLite with EnsureCreated holds the submission funnels against the Postgres mandate, no migrations or backup; no design system; zero analytics; an investor funnel; and this store sits in a public repo
+- [Watch list](memory/watch.md) — The site's copy claims what the tree does not support on four surfaces — five phantom programmes with stages, six searches into empty divisions, present-tense hiring, revenue as fact — and no gate tests the higher brand bar
