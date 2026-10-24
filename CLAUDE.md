@@ -1,25 +1,25 @@
 # FrostAura Public (`fa.public`)
 
 ## What this project is
-The monorepo for the FrostAura public-facing website — the surface the world sees first when it encounters the brand. A React 19 + Redux Toolkit single-page marketing and storytelling site, backed by a small ASP.NET Core API that persists **careers** and **investor** submissions and sends branded auto-response email. In production it is served as an Nginx container proxying `/api` to the API container.
+The monorepo for the FrostAura public-facing website — the surface the world sees first when it encounters the brand. A React 19 + Redux Toolkit single-page marketing and storytelling site, backed by a small ASP.NET Core API that persists **careers** and **investor** submissions and sends branded auto-response email. Its production shape is an Nginx container serving the built SPA and proxying `/api/` to the API container (`src/web/nginx.conf`); the API's own `/health` route sits outside that proxy and is not reachable through the web host.
 
 ## Architecture & key concepts
 - **Frontend:** React 19 + TypeScript + Vite, Redux Toolkit with RTK Query (`submissionsApi.ts`). Core components are `CareersForm`, `InvestorsForm`, `CompanyExplorer`, `GuidedSpotlight`, `ProjectCarousel`, `StepperIndicator`. The two forms are three-step funnels that hold their own step index and render their own inline `progress-step` markup; **`StepperIndicator` is the carousel dot control** (`role="tablist"`), imported only by `ProjectCarousel` and `GuidedSpotlight`. Editing it does not change either form.
 - **Backend:** ASP.NET Core 10, five-project clean architecture (`FrostAura.Domain` / `.Application` / `.Infrastructure` / `.Api` / `.Tests`), EF Core, MailKit for outbound mail.
 - **The submission flow is a contract, not an implementation detail.** Visitor submits → frontend POSTs JSON → API persists → API sends **both** a support notification **and** a branded auto-response → API returns a receipt. Both emails are part of the flow; dropping either breaks it.
-- **Brand artwork is deliberately vendored** into `src/web/src/assets/brand/` (black / gray / white / complex) so the app carries no machine-specific path dependency at runtime. Do not replace it with symlinks or external references.
+- **Brand artwork is deliberately vendored** into `src/web/src/assets/brand/` (black / gray / white / complex). Do not replace it with symlinks or external references; the why is in `MEMORY.md`.
 - **Local stack** is Docker Compose: MailHog + API + web. Persistence is the named Docker volume `frostaura-data` mounted at `/app/data`.
 
 ## Stack & repo
 .NET 10 + EF Core 10 with **SQLite** (a deviation from the mandated PostgreSQL — see `MEMORY.md`); React 19 + Vite 8 with hand-rolled CSS in `src/web/src/styles.css` and **no Tailwind or shadcn/ui** (also a deviation). Testing uses Vitest with `happy-dom` and Playwright for e2e. Repo: `https://github.com/frostaura/fa.public` (`main`).
 
-Docker images `frostaura-public-backend` and `frostaura-public-web` are published multi-arch by `docker-build-push.yml`. It carries **three** triggers: `workflow_run` completion of "FrostAura Public CI" on `main`, a `pull_request: branches-ignore: ['**']` guard that suppresses PR runs, and `workflow_dispatch`. Every build job admits a dispatch explicitly and then checks out `github.sha`, and the manifest-merge jobs carry no guard at all — so a manual run from **any** branch publishes and re-points `:latest`. Publishing from `main` is the intent, not what the file enforces; treat a dispatch as a release.
+Docker images `frostaura-public-backend` and `frostaura-public-web` are published multi-arch by `docker-build-push.yml`. Publishing from `main` is the intent, not what the file enforces: its `workflow_dispatch` path is unfenced, so a manual run from **any** branch publishes and re-points `:latest`. **Treat a dispatch as a release.** The trigger analysis is in `MEMORY.md`.
 
 ## Conventions & non-obvious rules
 - **This is the brand's front door.** Copy, visuals and accessibility carry a higher bar than internal tooling. Treat content edits as brand-level work, not engineering. Brand and editorial decisions made here set precedent and must be reflected back into root-level brand guidance — this is a **parent-controlled brand concern wearing a division project's clothes**.
-- **SMTP environment keys deliberately mirror `fa.lifeos`** — `EMAIL_SERVER`, `EMAIL_PORT`, `EMAIL_ACCOUNT`, `EMAIL_PASSWORD`, `EMAIL_SENDER_EMAIL`, `EMAIL_SENDER_NAME`, `EMAIL_ENABLE_SSL`, `EMAIL_SUPPORT_EMAIL`, `APP_URL`. This is intentional cross-project convention. Do not "clean up" the naming.
+- **SMTP environment keys deliberately mirror `fa.lifeos`** — `EMAIL_SERVER`, `EMAIL_PORT`, `EMAIL_ACCOUNT`, `EMAIL_PASSWORD`, `EMAIL_SENDER_EMAIL`, `EMAIL_SENDER_NAME`, `EMAIL_ENABLE_SSL`, `EMAIL_SUPPORT_EMAIL`, `EMAIL_BRAND_NAME`, `EMAIL_BRAND_OWNER`, `EMAIL_BRAND_PRIMARY_COLOR`, `EMAIL_BRAND_ALERT_COLOR`, `APP_URL`. `EMAIL_TIMEOUT_SECONDS` is this project's own addition. `src/backend/FrostAura.Api/Program.cs` is the authoritative list. Do not "clean up" the naming.
 - **Careers and investor submissions are the only data-handling flows on this surface.** Both must remain auditable and email-traceable — MailHog locally, configured SMTP in production.
-- **`CLAUDE.md` outranks `AGENTS.md` and `README.md`** (the README duplicates the stack table).
+- **`README.md` duplicates the stack table and loses to this file** on any conflict.
 
 ## Build, test, run
 `Makefile`: `up` (runs `ensure-env` first), `down`, `build-images`, `test`, `ci-local`. Prefer `make up` over running the API and frontend separately — most integration bugs here are stack-shaped.
@@ -32,7 +32,7 @@ npm scripts mirror this: `dev`, `dev:api`, `build` (`build:web` + `build:api`), 
 ## Never do here
 - Never drop either half of the two-email submission response.
 - Never ship copy or visuals here without treating them as brand output — root brand posture and language apply directly.
-- Never assume the standard FrostAura deploy chain runs end-to-end here; it stops at Docker Hub (see `MEMORY.md`).
+- Never assume the standard FrostAura deploy chain runs end-to-end from this repo: its workflows stop at Docker Hub, and whatever serves the site is configured outside it (see `MEMORY.md`).
 - Never destroy or recreate the `frostaura-data` volume casually — it holds every careers and investor submission.
 
 ## Dependencies on other FrostAura projects
@@ -44,11 +44,15 @@ Because this is the brand's front door, the root local skill `brand-compliance` 
 
 From the installed Gaia plugins: the UI-engineering capability for the React surface (e.g. `fa-engineering-ui`), and the mandated-stack baseline for the two open deviations — SQLite and no design system (e.g. `fa-engineering-default-tech-stack`); read it before treating either as settled.
 
-**Reference a plugin capability by what it does, naming the current skill only as an example — never as the identifier, never by path.** Plugin skills are not files in this repo, so nothing links to them, no checker sees a rename, and a bare name goes dead silently.
-
-This repo carries **no local `.claude/skills/`** and must not reacquire one. Forking a plugin procedure in here is prohibited outright; the reasoning, and what the last such set cost, are in `MEMORY.md`.
+No local `.claude/skills/`; the removed vendored set and its one surviving wiring are in `MEMORY.md`.
 
 ## Upkeep
-Three artifacts are kept current **as changes land**, not in a later pass: this `CLAUDE.md`, [`MEMORY.md`](MEMORY.md) with its `memory/` topic store, and the skills layer above (empty by decision). `MEMORY.md` is required here exactly as `CLAUDE.md` is, and cascades downward identically; a `CLAUDE.md` with no `MEMORY.md` beside it is a defect.
 
-Update the memory store at the end of any session that shipped, decided, discovered or abandoned something, and restamp `last_verified:` only for what you actually inspected. **Edit the topic files under `memory/`, never `MEMORY.md` itself** — the index is derived from their frontmatter, and a hand-cut entry is silently discarded by the next regeneration. Regenerate it from the tree root with `python3 .claude/scripts/audit-tree.py --no-git --fix-index --scope Technologies/projects/fa.public`; the `--scope` flag is what stops a fan-out agent rewriting a sibling's index mid-flight. This file changes only when a rule changes — a status belongs in `MEMORY.md`. A stale plugin procedure is fixed upstream and reinstalled, never forked back in here. The standard is [`/docs/operating/context-cascade.md`](../../../docs/operating/context-cascade.md).
+This file, `MEMORY.md`, its `memory/` topic store, and the skills that fire at this level are kept current **as changes land**, not in a later cleanup pass. `MEMORY.md` is required here exactly as this file is, and it cascades downward on identical terms — an instruction file with no `MEMORY.md` beside it is a defect, not a shortcut: the rules are stated and reality is left unstated, so the next agent infers status instead of reading it. Both files, or neither.
+
+- **Memory — always.** Update the topic files at the end of any session that shipped, decided, discovered, abandoned or unblocked something; re-cut the `description:` of any topic whose signal moved, then regenerate `MEMORY.md` from the topic files rather than editing it — from the tree root, `python3 .claude/scripts/audit-tree.py --no-git --fix-index --scope Technologies/projects/fa.public`; restamp `last_verified:` only for what you actually re-inspected. Record decisions *with their why* — a decision without its rationale is reversed by the next agent, who sees only its cost.
+- **This file — only when a rule changed.** A new convention, command or invariant earns an edit. A status change does not; it belongs in the memory store.
+- **Skills — when *how* the work is done changed.** Fix or delete a skill whose commands or thresholds no longer exist; a stale skill is worse than a missing one because it fires with authority. A procedure that would be correct in a repository with nothing to do with this tree belongs upstream in a plugin, never forked into this tree.
+- **Scratch — always.** Empty `.tmp/` before the session ends, promoting anything that still mattered first.
+
+None of these four are assessed by search. Read the scope's files end to end before changing any of them. Drift is not caused by neglect over months; it is caused by good sessions that ended without a close-out.
