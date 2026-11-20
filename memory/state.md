@@ -1,6 +1,6 @@
 ---
 name: fa-public-state
-description: "Dormant code, live site: frostaura.net serves the 2026-09-16 build and its /api answers, deployed by nothing in the repo. main in sync with origin after a 2026-11-20 push whose CI went red at the Playwright install"
+description: "Dormant code, live site: frostaura.net serves the 2026-09-16 build and its /api answers, deployed by nothing in the repo. main ahead-only by context commits after a 2026-11-20 push whose CI went red at the Playwright install"
 type: state
 last_verified: 2026-11-20
 ---
@@ -17,10 +17,11 @@ retired TaleWeaver entry from `siteContent.ts`. The last engineering commit is f
 Every commit since then is context-file upkeep, and `docs/architecture/` has not changed since
 2026-04-06.
 
-**Git topology: in sync, clean.** `main` tracks `origin/main` and matches the remote tip, which was
-pushed on 2026-11-20. That push published every previously unpushed context commit and this
-store, which is public writing now (see questions). The tree was clean and lock-free before this
-pass. Fetch before repeating any of this.
+**Git topology: ahead-only, by context commits.** `main` tracks `origin/main`. It matched the
+remote tip pushed on 2026-11-20, which published every earlier context commit and this store, so
+the store is public writing now (see questions). The 2026-11-20 kill-reconciliation pass then
+committed its context edits locally and did not push them. The tree was clean and lock-free before
+that pass. Fetch before repeating any of this.
 
 **Pipeline: red since the 2026-11-20 push.** CI's `validate` job passed lint, build and test, then
 failed at `npx playwright install --with-deps chromium`. `ubuntu-latest` now resolves to Ubuntu
