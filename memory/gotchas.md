@@ -1,5 +1,5 @@
 ---
-name: fa-public-gotchas
+name: technologies-fa-public-gotchas
 description: "Backend gate hides in npm scripts; any push to main republishes :latest on a live site; the image's default DB path sits outside its volume; unset SMTP drops both emails silently; /health on the web host is the SPA, not the API"
 type: gotcha
 last_verified: 2026-11-20

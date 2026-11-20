@@ -1,5 +1,5 @@
 ---
-name: fa-public-state
+name: technologies-fa-public-state
 description: "Dormant code, live site: frostaura.net serves the 2026-09-16 build and its /api answers, deployed by nothing in the repo. main ahead-only by context commits after a 2026-11-20 push whose CI went red at the Playwright install"
 type: state
 last_verified: 2026-11-20

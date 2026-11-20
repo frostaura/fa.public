@@ -1,5 +1,5 @@
 ---
-name: fa-public-watch
+name: technologies-fa-public-watch
 description: "Live site still advertises the killed Life OS and Startup, plus phantom programmes, searches into empty divisions, present-tense hiring and revenue as fact; no gate tests the brand bar; vendored residue incl. a dead mcp.json"
 type: watch
 last_verified: 2026-11-20

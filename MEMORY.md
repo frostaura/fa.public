@@ -1,4 +1,4 @@
-# MEMORY — Technologies/projects/fa.public
+# MEMORY — Technologies/projects/technologies.fa.public
 
 - [Current state](memory/state.md) — Dormant code, live site: frostaura.net serves the 2026-09-16 build and its /api answers, deployed by nothing in the repo. main ahead-only by context commits after a 2026-11-20 push whose CI went red at the Playwright install
 - [Live decisions](memory/decisions.md) — Brand artwork vendored so nothing depends on a machine path; EMAIL_* SMTP keys kept though their fa.lifeos sibling is gone; no local skills; images publish from main by intent, but workflow_dispatch is unfenced

@@ -1,4 +1,4 @@
-# FrostAura Public (`fa.public`)
+# FrostAura Public (`technologies.fa.public`)
 
 ## What this project is
 The monorepo for the FrostAura public-facing website — the surface the world sees first when it encounters the brand. A React 19 + Redux Toolkit single-page marketing and storytelling site, backed by a small ASP.NET Core API that persists **careers** and **investor** submissions and sends branded auto-response email. Its production shape is an Nginx container serving the built SPA and proxying `/api/` to the API container (`src/web/nginx.conf`); the API's own `/health` route sits outside that proxy and is not reachable through the web host, so a 200 from `/health` there is never evidence the API is up (how to probe instead is in the gotchas topic).
@@ -11,7 +11,7 @@ The monorepo for the FrostAura public-facing website — the surface the world s
 - **Local stack** is Docker Compose: MailHog + API + web. Persistence is the named Docker volume `frostaura-data` mounted at `/app/data` — **only because `.env` points `ConnectionStrings__DefaultConnection` under `/app/data/`.** Any host running the published image must set that key; the image's own default writes outside its volume (mechanism in the gotchas topic).
 
 ## Stack & repo
-.NET 10 + EF Core 10 with **SQLite** (a deviation from the mandated PostgreSQL — see `MEMORY.md`); React 19 + Vite 8 with hand-rolled CSS in `src/web/src/styles.css` and **no Tailwind or shadcn/ui** (also a deviation). Testing uses Vitest with `happy-dom` and Playwright for e2e. Repo: `https://github.com/frostaura/fa.public` (`main`).
+.NET 10 + EF Core 10 with **SQLite** (a deviation from the mandated PostgreSQL — see `MEMORY.md`); React 19 + Vite 8 with hand-rolled CSS in `src/web/src/styles.css` and **no Tailwind or shadcn/ui** (also a deviation). Testing uses Vitest with `happy-dom` and Playwright for e2e. Repo: `https://github.com/frostaura/technologies.fa.public` (`main`).
 
 Docker images `frostaura-public-backend` and `frostaura-public-web` are published multi-arch by `docker-build-push.yml`. Publishing from `main` is the intent, not what the file enforces: its `workflow_dispatch` path is unfenced, so a manual run from **any** branch publishes and re-points `:latest`. **Treat a dispatch as a release.** The trigger analysis is in `MEMORY.md`.
 
@@ -49,7 +49,7 @@ No local `.claude/skills/`; the removed vendored set and its one surviving wirin
 
 This file, `MEMORY.md`, its `memory/` topic store, and the skills that fire at this level are kept current **as changes land**, not in a later cleanup pass. `MEMORY.md` is required here exactly as this file is, and it cascades downward on identical terms — an instruction file with no `MEMORY.md` beside it is a defect, not a shortcut: the rules are stated and reality is left unstated, so the next agent infers status instead of reading it. Both files, or neither.
 
-- **Memory — always.** Update the topic files at the end of any session that shipped, decided, discovered, abandoned or unblocked something; re-cut the `description:` of any topic whose signal moved, then regenerate `MEMORY.md` from the topic files rather than editing it — from the tree root, `python3 .claude/scripts/audit-tree.py --no-git --fix-index --scope Technologies/projects/fa.public`; restamp `last_verified:` only for what you actually re-inspected. Record decisions *with their why* — a decision without its rationale is reversed by the next agent, who sees only its cost.
+- **Memory — always.** Update the topic files at the end of any session that shipped, decided, discovered, abandoned or unblocked something; re-cut the `description:` of any topic whose signal moved, then regenerate `MEMORY.md` from the topic files rather than editing it — from the tree root, `python3 .claude/scripts/audit-tree.py --no-git --fix-index --scope Technologies/projects/technologies.fa.public`; restamp `last_verified:` only for what you actually re-inspected. Record decisions *with their why* — a decision without its rationale is reversed by the next agent, who sees only its cost.
 - **This file — only when a rule changed.** A new convention, command or invariant earns an edit. A status change does not; it belongs in the memory store.
 - **Skills — when *how* the work is done changed.** Fix or delete a skill whose commands or thresholds no longer exist; a stale skill is worse than a missing one because it fires with authority. A procedure that would be correct in a repository with nothing to do with this tree belongs upstream in a plugin, never forked into this tree.
 - **Scratch — always.** Empty `.tmp/` before the session ends, promoting anything that still mattered first.
