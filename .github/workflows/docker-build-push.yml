@@ -23,7 +23,7 @@ env:
 jobs:
   build-backend-amd64:
     name: Build Backend (amd64)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
     steps:
       - name: Checkout code
@@ -79,7 +79,7 @@ jobs:
 
   merge-backend-manifests:
     name: Create Backend Multi-arch Manifest
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [build-backend-amd64, build-backend-arm64]
     steps:
       - name: Set up Docker Buildx
@@ -99,7 +99,7 @@ jobs:
 
   build-web-amd64:
     name: Build Web (amd64)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
     steps:
       - name: Checkout code
@@ -159,7 +159,7 @@ jobs:
 
   merge-web-manifests:
     name: Create Web Multi-arch Manifest
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [build-web-amd64, build-web-arm64]
     steps:
       - name: Set up Docker Buildx

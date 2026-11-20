@@ -13,12 +13,13 @@
     "lint": "npm run lint:web && npm run lint:api",
     "lint:web": "eslint . --max-warnings=0",
     "lint:api": "dotnet format src/backend/FrostAura.slnx --verify-no-changes",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.node.json",
     "test": "npm run test:web && npm run test:api",
     "test:web": "vitest run",
     "test:api": "dotnet test src/backend/FrostAura.slnx",
     "e2e": "playwright test",
     "preview": "vite preview",
-    "ci": "npm run lint && npm run build && npm run test"
+    "ci": "npm run lint && npm run typecheck && npm run build && npm run test"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
