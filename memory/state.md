@@ -29,8 +29,8 @@ decision ([decisions](decisions.md)). Fetch before repeating any of this.
 workflows (`disabled_manually`), so nothing builds or publishes until they are re-enabled. The old
 `frostaura-public-*` image repositories were deleted on the founder's instruction that night (404),
 and **by the last check so were the new ones**: Docker Hub listed zero repositories in the
-`frostaura` namespace, so no image of this site exists until CI publishes again. Whether the new
-names were meant to go is unrecorded.
+`frostaura` namespace, so no image of this site exists until CI publishes again. The new
+names were deleted on the founder's instruction to empty the namespace.
 
 **The site is live, and this repo does not say how.** On 2026-11-20 `https://frostaura.net` returned
 200 with `Last-Modified: 2026-09-16 20:48:49 GMT`, and its JS bundle still contains "Life OS",
