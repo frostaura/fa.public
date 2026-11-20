@@ -17,7 +17,7 @@ Docker images `frostaura-public-backend` and `frostaura-public-web` are publishe
 
 ## Conventions & non-obvious rules
 - **This is the brand's front door.** Copy, visuals and accessibility carry a higher bar than internal tooling. Treat content edits as brand-level work, not engineering. Brand and editorial decisions made here set precedent and must be reflected back into root-level brand guidance — this is a **parent-controlled brand concern wearing a division project's clothes**.
-- **SMTP environment keys deliberately mirror `fa.lifeos`** — `EMAIL_SERVER`, `EMAIL_PORT`, `EMAIL_ACCOUNT`, `EMAIL_PASSWORD`, `EMAIL_SENDER_EMAIL`, `EMAIL_SENDER_NAME`, `EMAIL_ENABLE_SSL`, `EMAIL_SUPPORT_EMAIL`, `EMAIL_BRAND_NAME`, `EMAIL_BRAND_OWNER`, `EMAIL_BRAND_PRIMARY_COLOR`, `EMAIL_BRAND_ALERT_COLOR`, `APP_URL`. `EMAIL_TIMEOUT_SECONDS` is this project's own addition. `src/backend/FrostAura.Api/Program.cs` is the authoritative list. Do not "clean up" the naming.
+- **SMTP environment keys keep their `EMAIL_*` names**, even though no sibling repo shares them any more (provenance and the reason that remains are in the decisions topic) — `EMAIL_SERVER`, `EMAIL_PORT`, `EMAIL_ACCOUNT`, `EMAIL_PASSWORD`, `EMAIL_SENDER_EMAIL`, `EMAIL_SENDER_NAME`, `EMAIL_ENABLE_SSL`, `EMAIL_SUPPORT_EMAIL`, `EMAIL_BRAND_NAME`, `EMAIL_BRAND_OWNER`, `EMAIL_BRAND_PRIMARY_COLOR`, `EMAIL_BRAND_ALERT_COLOR`, `APP_URL`. `EMAIL_TIMEOUT_SECONDS` is this project's own addition. `src/backend/FrostAura.Api/Program.cs` is the authoritative list. Do not "clean up" the naming.
 - **Careers and investor submissions are the only data-handling flows on this surface.** Both must remain auditable and email-traceable — MailHog locally, configured SMTP in production.
 - **`README.md` duplicates the stack table and loses to this file** on any conflict.
 
@@ -35,7 +35,7 @@ npm scripts mirror this: `dev`, `dev:api`, `build` (`build:web` + `build:api`), 
 - Never destroy or recreate the `frostaura-data` volume casually — it holds every careers and investor submission.
 
 ## Dependencies on other FrostAura projects
-None at runtime. The SMTP key shape is borrowed from `fa.lifeos` as convention only.
+None, at runtime or by convention.
 
 ## Skills
 
