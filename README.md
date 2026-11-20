@@ -47,7 +47,7 @@ tests/e2e             Playwright coverage for careers and investors
 
 - `src/backend/Dockerfile` builds the ASP.NET Core API runtime image.
 - `src/web/Dockerfile` builds the frontend and serves it from Nginx, proxying `/api` to the API container.
-- `.github/workflows/docker-build-push.yml` pushes multi-arch `frostaura-public-backend` and `frostaura-public-web` images after the main CI workflow succeeds.
+- `.github/workflows/docker-build-push.yml` pushes multi-arch `frostaura/technologies.fa.public-backend` and `frostaura/technologies.fa.public-web` images after the main CI workflow succeeds.
 
 ## Email configuration
 

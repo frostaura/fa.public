@@ -7,7 +7,7 @@ services:
       - '8025:8025'
 
   api:
-    image: ${DOCKERHUB_USERNAME:-frostaura}/frostaura-public-backend:local
+    image: ${DOCKERHUB_USERNAME:-frostaura}/technologies.fa.public-backend:local
     build:
       context: .
       dockerfile: ./src/backend/Dockerfile
@@ -23,7 +23,7 @@ services:
       - mailhog
 
   web:
-    image: ${DOCKERHUB_USERNAME:-frostaura}/frostaura-public-web:local
+    image: ${DOCKERHUB_USERNAME:-frostaura}/technologies.fa.public-web:local
     build:
       context: .
       dockerfile: ./src/web/Dockerfile

@@ -17,8 +17,8 @@ permissions:
   contents: read
 
 env:
-  BACKEND_IMAGE: frostaura-public-backend
-  WEB_IMAGE: frostaura-public-web
+  BACKEND_IMAGE: technologies.fa.public-backend
+  WEB_IMAGE: technologies.fa.public-web
 
 jobs:
   build-backend-amd64:

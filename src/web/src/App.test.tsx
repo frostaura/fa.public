@@ -27,8 +27,8 @@ function renderApp() {
 }
 
 // Products killed and divisions made dormant on 2026-11-20, plus the phantom programmes and
-// dormant-division roles the site used to advertise. Matched case-sensitively at word
-// boundaries, because several are also ordinary words ("wealth", "exploration", "ventures")
+// dormant-division roles the site used to advertise, and Crusaders' retired "Mainframe" name.
+// Matched case-sensitively at word boundaries, because several are also ordinary words ("wealth", "exploration", "ventures")
 // that the doctrine copy uses in lowercase.
 const removedNames = [
   'Life OS',
@@ -42,6 +42,7 @@ const removedNames = [
   'TaleWeaver',
   'Harness',
   'Integrations',
+  'Mainframe',
   'Undertow',
   'Squash Command Center',
   'Element Pure',
@@ -144,10 +145,16 @@ describe('App', () => {
 
     const choices = within(screen.getByRole('tablist', { name: 'Project choices' })).getAllByRole('tab');
     expect(choices.map((choice) => choice.querySelector('strong')?.textContent)).toEqual([
-      'Crusaders Mainframe',
+      'Crusaders Squash Control System',
       'Gaia',
       'FrostAura public website',
+      'Reel',
+      'Trimix',
+      'StoryTime',
     ]);
+    expect(
+      choices.map((choice) => choice.querySelector('span')?.textContent),
+    ).toEqual(['Technologies', 'Technologies', 'Technologies', 'Labs', 'Labs', 'Labs']);
 
     await user.click(choices[1]);
     expect(screen.getByRole('heading', { name: 'Gaia' })).toBeInTheDocument();

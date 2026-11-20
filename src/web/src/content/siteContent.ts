@@ -74,7 +74,7 @@ export const companyContent: Record<(typeof companyOrder)[number], CompanyConten
       'AI and data platforms that accelerate the rest of FrostAura.',
       'Elegant product execution with a bias toward real-world leverage.',
     ],
-    projects: ['Crusaders Mainframe', 'FrostAura public website'],
+    projects: ['Crusaders Squash Control System', 'Gaia', 'FrostAura public website'],
     cross: ['Labs', 'All internal systems'],
     roles: [
       ['Principal Platform Engineer', 'Distributed systems, reliability, product architecture, and security.'],
@@ -96,11 +96,11 @@ export const companyContent: Record<(typeof companyOrder)[number], CompanyConten
       'Incubate high-risk future capability through advanced concepts, frontier AI, stealth prototypes, and experimental programs.',
     energy: 'Frontier R&D',
     focus: [
-      'Internal R&D for projects not yet ready for public positioning.',
+      'Early product bets, built in the open before they earn a commercial home.',
       'Rapid exploration of software, hardware, and hybrid capability bets.',
       'Feeds mature programs into Technologies.',
     ],
-    projects: ['Moonshots', 'Frontier AI', 'Stealth prototypes', 'Advanced systems'],
+    projects: ['Reel', 'Trimix', 'StoryTime'],
     cross: ['Technologies'],
     roles: [
       ['Principal Research Engineer', 'Theory-to-system translation and rapid prototyping.'],
@@ -118,14 +118,14 @@ export const companyContent: Record<(typeof companyOrder)[number], CompanyConten
 
 export const projectContent: ProjectContent[] = [
   {
-    name: 'Crusaders Mainframe',
+    name: 'Crusaders Squash Control System',
     company: 'FrostAura Technologies',
     thesis: 'Court booking for racquet clubs, sold in playing minutes.',
     projectType: 'Court-booking software',
   },
   {
     name: 'Gaia',
-    company: 'FrostAura Labs',
+    company: 'FrostAura Technologies',
     thesis:
       'Installable AI-agent plugins that give an agent a repository’s context, process, and product discipline, plus an MCP server.',
     projectType: 'AI agent toolkit',
@@ -135,6 +135,24 @@ export const projectContent: ProjectContent[] = [
     company: 'FrostAura Technologies',
     thesis: 'This site: the FrostAura front door, with the careers and investor intake flows.',
     projectType: 'Public website',
+  },
+  {
+    name: 'Reel',
+    company: 'FrostAura Labs',
+    thesis: 'A movie and TV recommender built from your own viewing history.',
+    projectType: 'Recommender app',
+  },
+  {
+    name: 'Trimix',
+    company: 'FrostAura Labs',
+    thesis: 'A dive log that lives on your phone.',
+    projectType: 'Dive-log app',
+  },
+  {
+    name: 'StoryTime',
+    company: 'FrostAura Labs',
+    thesis: 'On-device bedtime stories for iPhone.',
+    projectType: 'iPhone app',
   },
 ];
 

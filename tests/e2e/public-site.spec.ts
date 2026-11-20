@@ -11,11 +11,18 @@ test('renders the FrostAura landing experience and switches views', async ({ pag
   await page.getByRole('navigation', { name: 'Primary' }).getByRole('button', { name: 'Projects' }).click();
 
   await expect(page.getByRole('heading', { name: /projects in motion across the system/i })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Crusaders Mainframe' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Crusaders Squash Control System' })).toBeVisible();
   await expect(
     page.getByRole('tablist', { name: 'Project choices' }).getByRole('tab'),
-  ).toHaveText([/Crusaders Mainframe/, /Gaia/, /FrostAura public website/]);
-  await expect(page.getByText(/life os|frostaura startup/i)).toHaveCount(0);
+  ).toHaveText([
+    /Technologies\s*Crusaders Squash Control System/,
+    /Technologies\s*Gaia/,
+    /Technologies\s*FrostAura public website/,
+    /Labs\s*Reel/,
+    /Labs\s*Trimix/,
+    /Labs\s*StoryTime/,
+  ]);
+  await expect(page.getByText(/life os|frostaura startup|crusaders mainframe/i)).toHaveCount(0);
 
   await page.getByRole('navigation', { name: 'Primary' }).getByRole('button', { name: 'Architecture' }).click();
 
