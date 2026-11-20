@@ -21,7 +21,7 @@ FrostAura Public is a two-runtime public-site system:
 - ASP.NET Core API in `src/backend/FrostAura.Api`.
 - Application, Domain, and Infrastructure projects isolate HTTP contracts, submission workflows, and external concerns.
 - SQLite stores submissions locally for the first public-site baseline.
-- SMTP email delivery is implemented with MailKit and mirrors the LifeOS configuration shape.
+- SMTP email delivery is implemented with MailKit and configured through `EMAIL_*` environment keys.
 
 ## Submission flow
 

@@ -11,7 +11,17 @@ test('renders the FrostAura landing experience and switches views', async ({ pag
   await page.getByRole('navigation', { name: 'Primary' }).getByRole('button', { name: 'Projects' }).click();
 
   await expect(page.getByRole('heading', { name: /projects in motion across the system/i })).toBeVisible();
-  await expect(page.getByRole('heading', { name: /life os/i })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Crusaders Mainframe' })).toBeVisible();
+  await expect(
+    page.getByRole('tablist', { name: 'Project choices' }).getByRole('tab'),
+  ).toHaveText([/Crusaders Mainframe/, /Gaia/, /FrostAura public website/]);
+  await expect(page.getByText(/life os|frostaura startup/i)).toHaveCount(0);
+
+  await page.getByRole('navigation', { name: 'Primary' }).getByRole('button', { name: 'Architecture' }).click();
+
+  await expect(
+    page.getByRole('tablist', { name: 'FrostAura companies' }).getByRole('tab'),
+  ).toHaveText(['Consolidated', 'Technologies', 'Labs']);
 });
 
 test('submits the careers flow', async ({ page }) => {

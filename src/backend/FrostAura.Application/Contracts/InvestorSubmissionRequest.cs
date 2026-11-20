@@ -21,9 +21,11 @@ public class InvestorSubmissionRequest
     public string Region { get; set; } = string.Empty;
 
     [MinLength(1)]
+    [AllowedOptions(SubmissionOptionSet.Division)]
     public IReadOnlyList<string> CompanyInterest { get; set; } = [];
 
     [Required]
+    [AllowedOptions(SubmissionOptionSet.InvestorInterestProfile)]
     public string InterestProfile { get; set; } = string.Empty;
 
     [Required]

@@ -1,4 +1,5 @@
 import {
+  adjacentCompanyOptions,
   careerTrackOptions,
   companyInterestOptions,
 } from '../content/siteContent';
@@ -14,17 +15,6 @@ import {
   updateField,
 } from '../features/forms/formsSlice';
 import { useSubmitCareerMutation } from '../app/api/submissionsApi';
-
-const adjacentOptions = [
-  'Technologies',
-  'Industries',
-  'Helix',
-  'Underwater',
-  'Exploration',
-  'Labs',
-  'Ventures',
-  'Foundation',
-];
 
 function validateStep(step: number, draft: ReturnType<typeof useCareerDraft>) {
   if (step === 0) {
@@ -209,7 +199,7 @@ export function CareersForm() {
           <div className="field">
             <span>Where else could you add value?</span>
             <div className="choice-grid">
-              {adjacentOptions.map((option) => (
+              {adjacentCompanyOptions.map((option) => (
                 <label key={option} className="choice">
                   <input
                     type="checkbox"

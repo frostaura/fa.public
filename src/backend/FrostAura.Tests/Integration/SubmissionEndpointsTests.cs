@@ -26,7 +26,7 @@ public class SubmissionEndpointsTests
                 RoleTrack = "Principal Software and Platform Engineering",
                 AvailabilityWindow = "Immediately",
                 Location = "Cape Town, South Africa",
-                AdjacentCompanyInterest = ["Ventures"],
+                AdjacentCompanyInterest = ["Labs"],
                 FullName = "Jane Doe",
                 Email = "jane@example.com",
                 RecentRole = "Principal Engineer",
@@ -59,7 +59,7 @@ public class SubmissionEndpointsTests
                 Email = "alex@example.com",
                 InvestorType = "Family office",
                 Region = "Global",
-                CompanyInterest = ["Technologies", "Ventures"],
+                CompanyInterest = ["Technologies", "Labs"],
                 InterestProfile = "Operating company growth",
                 CapitalRange = "1M - 5M USD equivalent",
                 TimeHorizon = "Within 12 months",
@@ -77,6 +77,125 @@ public class SubmissionEndpointsTests
         var dbContext = scope.ServiceProvider.GetRequiredService<FrostAuraDbContext>();
         Assert.Single(dbContext.InvestorSubmissions);
     }
+
+    [Fact]
+    public async Task RejectionFixtures_AreAcceptedUntilOneOptionIsChanged()
+    {
+        await using var factory = new TestApplicationFactory();
+        using var client = factory.CreateClient();
+
+        var careers = await client.PostAsJsonAsync("/api/careers/submissions", ValidCareerRequest());
+        var investors = await client.PostAsJsonAsync("/api/investors/submissions", ValidInvestorRequest());
+
+        Assert.Equal(HttpStatusCode.Created, careers.StatusCode);
+        Assert.Equal(HttpStatusCode.Created, investors.StatusCode);
+    }
+
+    public static TheoryData<string, string> RejectedCareerOptions => new()
+    {
+        { "primary", "FrostAura Helix" },
+        { "primary", "FrostAura Ventures" },
+        { "adjacent", "Industries" },
+        { "adjacent", "Underwater" },
+        { "adjacent", "Exploration" },
+        { "adjacent", "Foundation" },
+        { "track", "Robotics / Embedded / Hardware Engineering" },
+        { "track", "Computational Biology / Life Systems" },
+        { "track", "Field Operations / Exploration" },
+    };
+
+    [Theory]
+    [MemberData(nameof(RejectedCareerOptions))]
+    public async Task CareersEndpoint_RejectsOptionsForInactiveDivisions(string field, string value)
+    {
+        await using var factory = new TestApplicationFactory();
+        using var client = factory.CreateClient();
+
+        var request = ValidCareerRequest();
+        switch (field)
+        {
+            case "primary":
+                request.PrimaryCompanyInterest = value;
+                break;
+            case "adjacent":
+                request.AdjacentCompanyInterest = ["Labs", value];
+                break;
+            default:
+                request.RoleTrack = value;
+                break;
+        }
+
+        var response = await client.PostAsJsonAsync("/api/careers/submissions", request);
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        using var scope = factory.Services.CreateScope();
+        Assert.Empty(scope.ServiceProvider.GetRequiredService<FrostAuraDbContext>().CareerSubmissions);
+    }
+
+    public static TheoryData<string, string> RejectedInvestorOptions => new()
+    {
+        { "company", "Helix" },
+        { "company", "Ventures" },
+        { "company", "Foundation" },
+        { "profile", "Portfolio venture creation" },
+        { "profile", "Philanthropic / impact alignment" },
+    };
+
+    [Theory]
+    [MemberData(nameof(RejectedInvestorOptions))]
+    public async Task InvestorsEndpoint_RejectsOptionsForInactiveDivisions(string field, string value)
+    {
+        await using var factory = new TestApplicationFactory();
+        using var client = factory.CreateClient();
+
+        var request = ValidInvestorRequest();
+        if (field == "company")
+        {
+            request.CompanyInterest = ["Technologies", value];
+        }
+        else
+        {
+            request.InterestProfile = value;
+        }
+
+        var response = await client.PostAsJsonAsync("/api/investors/submissions", request);
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        using var scope = factory.Services.CreateScope();
+        Assert.Empty(scope.ServiceProvider.GetRequiredService<FrostAuraDbContext>().InvestorSubmissions);
+    }
+
+    private static CareerSubmissionRequest ValidCareerRequest() =>
+        new()
+        {
+            PrimaryCompanyInterest = "FrostAura Labs",
+            RoleTrack = "Principal AI / ML Engineering",
+            AvailabilityWindow = "Within 30 days",
+            Location = "Cape Town, South Africa",
+            AdjacentCompanyInterest = ["Technologies"],
+            FullName = "Jane Doe",
+            Email = "jane@example.com",
+            RecentRole = "Principal Engineer",
+            HighestLeverageContribution = "Build the platform backbone.",
+            ProofOfWork = "Led a distributed systems migration.",
+        };
+
+    private static InvestorSubmissionRequest ValidInvestorRequest() =>
+        new()
+        {
+            FullName = "Alex Investor",
+            Organization = "North Star Capital",
+            Email = "alex@example.com",
+            InvestorType = "Family office",
+            Region = "Global",
+            CompanyInterest = ["Labs"],
+            InterestProfile = "Frontier R&D exposure",
+            CapitalRange = "1M - 5M USD equivalent",
+            TimeHorizon = "Within 12 months",
+            PreferredMode = "Capital and strategic support",
+            Thesis = "The architecture compounds capability.",
+            ValueAdd = "Operator network and long-horizon capital.",
+        };
 
     private sealed class TestApplicationFactory : WebApplicationFactory<Program>, IAsyncDisposable
     {

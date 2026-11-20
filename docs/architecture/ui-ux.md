@@ -23,7 +23,7 @@ navigation-led React application rather than a long-scrolling page.
 ## Visual systems
 
 - The architecture experience is an interactive FrostAura energy map / company constellation with compact nodes by default and reveal-on-select detail.
-- Projects use a stable spotlight carousel with one active slide, explicit controls, and auto-advance that never exposes empty states.
+- Projects use a stable spotlight carousel with one active slide, explicit controls, and auto-advance that never exposes empty states. It lists only living products, and the architecture view lists only the parent and the active divisions (Technologies and Labs).
 - Careers and investors use guided highlight rails above their forms instead of dense sidebars.
 - Current focus roles are featured within the careers spotlight rather than isolated in a detached card.
 

@@ -35,6 +35,7 @@ tests/e2e             Playwright coverage for careers and investors
 | `npm run dev` | Start the Vite frontend |
 | `npm run dev:api` | Start the ASP.NET Core API |
 | `npm run lint` | Run frontend linting and backend format checks |
+| `npm run typecheck` | Type-check the web app, e2e specs, and build configs |
 | `npm run build` | Build the frontend and backend |
 | `npm run test` | Run frontend and backend automated tests |
 | `npm run e2e` | Run Playwright end-to-end coverage |
@@ -46,11 +47,11 @@ tests/e2e             Playwright coverage for careers and investors
 
 - `src/backend/Dockerfile` builds the ASP.NET Core API runtime image.
 - `src/web/Dockerfile` builds the frontend and serves it from Nginx, proxying `/api` to the API container.
-- `.github/workflows/docker-build-push.yml` mirrors the LifeOS publish pattern and pushes multi-arch `frostaura-public-backend` and `frostaura-public-web` images after the main CI workflow succeeds.
+- `.github/workflows/docker-build-push.yml` pushes multi-arch `frostaura-public-backend` and `frostaura-public-web` images after the main CI workflow succeeds.
 
 ## Email configuration
 
-The backend intentionally mirrors the LifeOS SMTP-style environment keys for consistency:
+The backend reads these SMTP environment keys. The host that runs the published images sets them, so keep the names unchanged:
 
 - `EMAIL_SERVER`
 - `EMAIL_PORT`

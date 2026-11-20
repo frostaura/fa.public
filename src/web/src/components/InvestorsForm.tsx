@@ -1,5 +1,6 @@
 import { useSubmitInvestorMutation } from '../app/api/submissionsApi';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { investorCompanyOptions, investorInterestProfileOptions } from '../content/siteContent';
 import {
   nextStep,
   previousStep,
@@ -10,17 +11,6 @@ import {
   toggleArrayValue,
   updateField,
 } from '../features/forms/formsSlice';
-
-const companyOptions = [
-  'Technologies',
-  'Industries',
-  'Helix',
-  'Underwater',
-  'Exploration',
-  'Labs',
-  'Ventures',
-  'Foundation',
-];
 
 function validateStep(step: number, draft: ReturnType<typeof useInvestorDraft>) {
   if (step === 0) {
@@ -220,7 +210,7 @@ export function InvestorsForm() {
           <div className="field">
             <span>Which FrostAura companies are most relevant to you?</span>
             <div className="choice-grid">
-              {companyOptions.map((option) => (
+              {investorCompanyOptions.map((option) => (
                 <label key={option} className="choice">
                   <input
                     type="checkbox"
@@ -257,13 +247,7 @@ export function InvestorsForm() {
                 }
               >
                 <option value="">Select one</option>
-                {[
-                  'Operating company growth',
-                  'Frontier R&D exposure',
-                  'Strategic partnership',
-                  'Portfolio venture creation',
-                  'Philanthropic / impact alignment',
-                ].map((option) => (
+                {investorInterestProfileOptions.map((option) => (
                   <option key={option} value={option}>
                     {option}
                   </option>

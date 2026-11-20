@@ -156,8 +156,8 @@ export default function App() {
                 <h2>Projects in motion across the system.</h2>
               </div>
               <p className="section-copy">
-                One active spotlight at a time, with stable controls and a clearer sense of how
-                programs move between cash flow, capability, and frontier optionality.
+                One active spotlight at a time, across the products FrostAura is building in
+                Technologies and Labs.
               </p>
             </div>
 
@@ -250,13 +250,13 @@ export default function App() {
               <div className="hero-side">
                 <article className="frost-panel home-system-panel">
                   <p className="guided-label">System map</p>
-                  <h3>One FrostAura system across capital, capability, ventures, and public good.</h3>
+                  <h3>One FrostAura system across capital, software, and frontier R&amp;D.</h3>
                   <p className="section-copy">
-                    Holding company, venture studio, R&amp;D platform, operator, and public-good
-                    engine inside one disciplined shell.
+                    Holding company, venture studio, R&amp;D platform, and operator inside one
+                    disciplined shell.
                   </p>
                   <div className="flow-band" aria-hidden="true">
-                    {['Capital', 'Capability', 'Ventures', 'Public good'].map((item) => (
+                    {['Capital', 'Capability', 'Progress'].map((item) => (
                       <span key={item}>{item}</span>
                     ))}
                   </div>

@@ -20,7 +20,7 @@ The careers flow is a three-step submission form for senior operators, builders,
 
 ### System behavior
 
-1. Validate required fields.
+1. Validate required fields, and reject a company interest, adjacent company interest, or role track outside the options the form offers (active divisions only).
 2. Persist the submission.
 3. Notify FrostAura support.
 4. Send a branded confirmation email to the applicant.
@@ -46,7 +46,7 @@ The investor flow is a three-step expression-of-interest form for aligned capita
 
 ### System behavior
 
-1. Validate required fields, including at least one company interest.
+1. Validate required fields, including at least one company interest, and reject a company interest or interest profile outside the options the form offers (active divisions only).
 2. Persist the submission.
 3. Notify FrostAura support.
 4. Send a branded confirmation email to the submitter.

@@ -5,9 +5,11 @@ namespace FrostAura.Application.Contracts;
 public class CareerSubmissionRequest
 {
     [Required]
+    [AllowedOptions(SubmissionOptionSet.CareerPrimaryCompany)]
     public string PrimaryCompanyInterest { get; set; } = string.Empty;
 
     [Required]
+    [AllowedOptions(SubmissionOptionSet.CareerRoleTrack)]
     public string RoleTrack { get; set; } = string.Empty;
 
     [Required]
@@ -16,6 +18,7 @@ public class CareerSubmissionRequest
     [Required]
     public string Location { get; set; } = string.Empty;
 
+    [AllowedOptions(SubmissionOptionSet.Division)]
     public IReadOnlyList<string> AdjacentCompanyInterest { get; set; } = [];
 
     [Required]
