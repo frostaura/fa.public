@@ -7,6 +7,11 @@ last_verified: 2026-11-20
 
 # Current state
 
+**Update 2026-11-21:** the founder re-enabled every CI workflow. The push that carries this line is
+the first since, so its run is the first chance to publish under the new image names. Sentences
+below that call CI paused or disabled describe the night of 2026-11-20 and are superseded once that
+run's result is recorded here.
+
 _Re-verified late 2026-11-20 with `git fetch` and `rev-list --left-right` in both clones, `git show`
 on the night's commits, `gh workflow list`, `gh run list`, Docker Hub's repository API, and read-only
 `curl` probes of `frostaura.net` and its live JS bundle._
